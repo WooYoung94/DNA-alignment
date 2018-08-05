@@ -13,7 +13,7 @@ if __name__ == '__main__':
 
 		if 'chr' in line:
 
-			name = line.replace('\n', '')
+			name = line.replace('\n', '')[1:]
 			seq[name] = list()
 
 		else:
