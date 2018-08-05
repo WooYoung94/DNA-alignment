@@ -14,7 +14,7 @@ if __name__ == '__main__':
 
 	data = list()
 
-	with open('./chr13.fa', 'r') as fs:
+	with open(sys.argv[1], 'r') as fs:
 
 		seq = fs.read()
 
@@ -29,4 +29,4 @@ if __name__ == '__main__':
 			pairIdx = (idx + random.randint(MIN_PAIR, MAX_PAIR)) % (len(seq) - MAX_PAIR - SEQLENGTH)
 			pair = data[pairIdx]
 
-			fs.write('\t'.join([val, pair, idx, pairIdx]) + '\n')
+			fs.write('\t'.join([val, pair, str(idx), str(pairIdx)]) + '\n')
