@@ -38,9 +38,7 @@ def train(param = None):
 
 			s1 = s1.to(device)
 			s2 = s2.to(device)
-			y1 = y1.to(device)
-			y2 = y2.to(device)
-			y = torch.cat((y1, y2), dim = 1)
+			y = y.to(device)
 
 			out = seqModel(s1, s2)
 			loss = criterion(out, y)
