@@ -34,7 +34,7 @@ def train(param = None):
 
 	for epoch in range(epochNum):
 
-		for idx, (s1, s2, y1, y2) in enumerate(seqDataLoader):
+		for idx, (s1, s2, y) in enumerate(seqDataLoader):
 
 			s1 = s1.to(device)
 			s2 = s2.to(device)
