@@ -19,17 +19,15 @@ def test(seqModel):
 	seqModel = seqModel.to(device)
 	seqModel.eval()
 	
-	for epoch in range(epochNum):
+	for idx, (s1, s2, y) in enumerate(seqDataLoader):
 
-		for idx, (s1, s2, y) in enumerate(seqDataLoader):
+		s11 = s1.to(device)
+		s22 = s2.to(device)
+		yy = y.to(device)
 
-			s11 = s1.to(device)
-			s22 = s2.to(device)
-			yy = y.to(device)
+		out = seqModel(s11, s22)
+		loss = criterion(out, yy)
 
-			out = seqModel(s11, s22)
-			loss = criterion(out, yy)
+		o = out.to('cpu').numpy()
 
-			o = out.to('cpu').numpy()
-
-			print('True : [{}/{}], Pred : [{}/{}], Loss : {}'.format(y[0], y[1], o[0], o[1], loss.item()))
+		print('True : [{}/{}], Pred : [{}/{}], Loss : {}'.format(y[0], y[1], o[0], o[1], loss.item()))
