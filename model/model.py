@@ -10,7 +10,8 @@ class seqMLP(nn.Module):
 
 		self.fc1 = nn.Linear(256, 128)
 		self.fc2 = nn.Linear(128, 128)
-		self.fc3 = nn.Linear(128, 2)
+		self.fc3 = nn.Linear(128, 128)
+		self.fc4 = nn.Linear(128, 2)
 
 	def forward(self, s1, s2):
 
@@ -20,5 +21,7 @@ class seqMLP(nn.Module):
 		out = self.fc2(out)
 		out = F.relu(out, inplace = True)	
 		out = self.fc3(out)
+		out = F.relu(out, inplace = True)	
+		out = self.fc4(out)
 
 		return out
