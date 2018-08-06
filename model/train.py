@@ -1,35 +1,34 @@
 import os
 import sys
-import timeit
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import torchvision
-import torchvision.transforms as transforms
-import scipy as sp
-import numpy as np
-import matplotlib as mpl
-import matplotlib.pyplot as plt
 
 import model as m
 import dataLoader as dl
 
-def train():
+def train(param):
 
-	modelPath = '/home/youngwoo/Documents/models/DNA/model_epoch{}.model'
-	device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-	batchSize = 128
-	shuffle = True
-	learningRate = 0.001
-	epochNum = 100
+	if param:
 
-	seqData = dataLodaer.sequenceDataset('/home/dataset/genome/hg38/devData/testTrain_chrM.fa')
-	seqDataLoader = torch.utils.data.DataLoader(dataset = seqData, batch_size = batchSize, shuffle = shuffle)
+		pass
 
-	seqModel = m.seqMLP()
-	criterion = nn.MSELoss()
-	optimizer = torch.optim.Adam(list(seqModel.parameters()), lr = learningRate)
-	totalStep = len(seqDataLoader)
+	else:
+
+		modelPath = '/home/youngwoo/Documents/models/DNA/model_epoch{}.model'
+		device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+		batchSize = 128
+		shuffle = True
+		learningRate = 0.001
+		epochNum = 100
+
+		seqData = dataLodaer.sequenceDataset('/home/dataset/genome/hg38/devData/testTrain_chrM.fa')
+		seqDataLoader = torch.utils.data.DataLoader(dataset = seqData, batch_size = batchSize, shuffle = shuffle)
+
+		seqModel = m.seqMLP()
+		criterion = nn.MSELoss()
+		optimizer = torch.optim.Adam(list(seqModel.parameters()), lr = learningRate)
+		totalStep = len(seqDataLoader)
 
 	seqModel.train()
 
