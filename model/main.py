@@ -7,7 +7,7 @@ import torch.nn.functional as F
 
 import model as m
 import dataLoader as dl
-import train as t
+import train
 
 
 
@@ -16,8 +16,16 @@ import train as t
 
 if __name__ == '__main__':
 
+	seqModel = m.seqModel()
+
 	timeNow = timeit.default_timer()
 	print('[info] train start')
-	t.train()
+	train.train(seqModel)
 	trainTime = timeit.default_timer() - timeNow
 	print('[info] elapsed time : ', trainTime)
+
+	timeNow = timeit.default_timer()
+	print('[info] train start')
+	train.test(seqModel)
+	testTime = timeit.default_timer() - timeNow
+	print('[info] elapsed time : ', testTime)

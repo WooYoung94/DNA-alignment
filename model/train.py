@@ -7,7 +7,7 @@ import torch.nn.functional as F
 import model as m
 import dataLoader as dl
 
-def train(param = None):
+def train(seqModel, param = None):
 
 	if param:
 
@@ -20,12 +20,12 @@ def train(param = None):
 		batchSize = 1280
 		shuffle = True
 		learningRate = 0.0001
-		epochNum = 1000
+		epochNum = 10
 
 		seqData = dl.sequenceDataset('/home/dataset/genome/hg38/devData/testTrain_chrM.fa')
 		seqDataLoader = torch.utils.data.DataLoader(dataset = seqData, batch_size = batchSize, shuffle = shuffle)
 
-		seqModel = m.seqMLP().to(device)
+		seqModel = seqModel.to(device)
 		criterion = nn.MSELoss()
 		optimizer = torch.optim.Adam(list(seqModel.parameters()), lr = learningRate)
 		totalStep = len(seqDataLoader)
