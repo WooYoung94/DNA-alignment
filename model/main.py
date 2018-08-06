@@ -25,7 +25,7 @@ if __name__ == '__main__':
 	print('[info] elapsed time : ', trainTime)
 
 	timeNow = timeit.default_timer()
-	print('[info] train start')
-	train.test(seqModel)
+	print('[info] test start')
+	test.test(seqModel)
 	testTime = timeit.default_timer() - timeNow
 	print('[info] elapsed time : ', testTime)
