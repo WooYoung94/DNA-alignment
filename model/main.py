@@ -16,7 +16,7 @@ import train
 
 if __name__ == '__main__':
 
-	seqModel = m.seqModel()
+	seqModel = m.seqMLP()
 
 	timeNow = timeit.default_timer()
 	print('[info] train start')
