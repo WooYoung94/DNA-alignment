@@ -47,10 +47,12 @@ def train(param = None):
 			loss.backward()
 			optimizer.step()
 
-			if (idx + 1) % 100 == 0:
+			#if (idx + 1) % 100 == 0:
+			#
+			#	print('Epoch : [{}/{}], Step : [{}/{}], Loss : {}'.format(epoch + 1, epochNum, idx + 1, totalStep, loss.item()))
 
-				print('Epoch : [{}/{}], Step : [{}/{}], Loss : {}'.format(epoch + 1, epochNum, idx + 1, totalStep, loss.item()))
+		print('Epoch : [{}/{}], Loss : {}'.format(epoch + 1, epochNum, loss.item()))
 
-		if epoch % 10 == 0 and epoch > 0:
+		if epoch % 100 == 0 and epoch > 0:
 
 			torch.save(seqModel.state_dict(), modelPath.format(epoch))
