@@ -16,6 +16,8 @@ def test(seqModel):
 	seqData = dl.sequenceDataset('/home/dataset/genome/hg38/devData/testTrain_chrM.fa')
 	seqDataLoader = torch.utils.data.DataLoader(dataset = seqData, batch_size = batchSize, shuffle = shuffle)
 
+	criterion = nn.MSELoss()
+
 	seqModel = seqModel.to(device)
 	seqModel.eval()
 	
