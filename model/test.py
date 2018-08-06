@@ -30,8 +30,8 @@ def test(seqModel):
 		out = seqModel(s11, s22)
 		loss = criterion(out, yy)
 
-		y = y.numpy()
-		o = out.detach().cpu().numpy()
+		y = y.numpy()[0]
+		o = out.detach().cpu().numpy()[0]
 
 		print(y)
 		print(y.shape)
