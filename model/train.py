@@ -7,7 +7,7 @@ import torch.nn.functional as F
 import model as m
 import dataLoader as dl
 
-def train(param):
+def train(param = None):
 
 	if param:
 
