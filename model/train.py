@@ -17,10 +17,10 @@ def train(param = None):
 
 		modelPath = '/home/youngwoo/Documents/models/DNA/model_epoch{}.model'
 		device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-		batchSize = 128
+		batchSize = 1280
 		shuffle = True
-		learningRate = 0.001
-		epochNum = 100
+		learningRate = 0.0001
+		epochNum = 1000
 
 		seqData = dl.sequenceDataset('/home/dataset/genome/hg38/devData/testTrain_chrM.fa')
 		seqDataLoader = torch.utils.data.DataLoader(dataset = seqData, batch_size = batchSize, shuffle = shuffle)
