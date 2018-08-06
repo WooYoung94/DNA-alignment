@@ -32,4 +32,4 @@ def test(seqModel):
 
 		o = out.detach().numpy()
 
-		print('True : [{}/{}], Pred : [{}/{}], Delta : [{}/{}], Loss : {}'.format(y[0], y[1], o[0], o[1], , y[0] - o[0], y[1] - o[1], loss.item()))
+		print('True : [{}/{}], Pred : [{}/{}], Delta : [{}/{}], Loss : {}'.format(y[0], y[1], o[0], o[1], y[0] - o[0], y[1] - o[1], loss.item()))
