@@ -9,9 +9,10 @@ import dataLoader as dl
 
 def test(seqModel):
 
+	device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 	batchSize = 1
 	shuffle = True
-	
+
 	seqData = dl.sequenceDataset('/home/dataset/genome/hg38/devData/testTrain_chrM.fa')
 	seqDataLoader = torch.utils.data.DataLoader(dataset = seqData, batch_size = batchSize, shuffle = shuffle)
 
