@@ -30,6 +30,6 @@ def test(seqModel):
 		out = seqModel(s11, s22)
 		loss = criterion(out, yy)
 
-		o = out.detach().numpy()
+		o = out.detach().cpu().numpy()
 
 		print('True : [{}/{}], Pred : [{}/{}], Delta : [{}/{}], Loss : {}'.format(y[0], y[1], o[0], o[1], y[0] - o[0], y[1] - o[1], loss.item()))
