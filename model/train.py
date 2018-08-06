@@ -12,7 +12,7 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 
 import model as m
-import dataLodaer as dl
+import dataLoader as dl
 
 def train():
 
