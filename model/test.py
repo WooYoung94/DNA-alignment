@@ -17,7 +17,7 @@ def test(seqModel):
 	seqDataLoader = torch.utils.data.DataLoader(dataset = seqData, batch_size = batchSize, shuffle = shuffle)
 
 	seqModel = seqModel.to(device)
-	seqModel.test()
+	seqModel.eval()
 	
 	for epoch in range(epochNum):
 
