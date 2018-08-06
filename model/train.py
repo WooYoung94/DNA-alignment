@@ -16,14 +16,14 @@ import dataLodaer as dl
 
 def train():
 
-	modelPath = '/home/youngwoo/Documents/DNA_model/model_epoch{}.model'
+	modelPath = '/home/youngwoo/Documents/models/DNA/model_epoch{}.model'
 	device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 	batchSize = 128
 	shuffle = True
 	learningRate = 0.001
 	epochNum = 100
 
-	seqData = dataLodaer.sequenceDataset('/home/dataset/genome/hg38/devData/trainData_chrM.fa')
+	seqData = dataLodaer.sequenceDataset('/home/dataset/genome/hg38/devData/testTrain_chrM.fa')
 	seqDataLoader = torch.utils.data.DataLoader(dataset = seqData, batch_size = batchSize, shuffle = shuffle)
 
 	seqModel = m.seqMLP()
