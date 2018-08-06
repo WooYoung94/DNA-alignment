@@ -14,6 +14,7 @@ def seq2vec(s):
 	s = s.replace('G', '2')
 	s = s.replace('T', '3')
 	s = s.replace('C', '4')
+	s = s.replace('N', '5')
 
 	return np.array(list(s), dtype = np.float32)
 
