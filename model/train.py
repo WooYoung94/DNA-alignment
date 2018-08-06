@@ -25,7 +25,7 @@ def train(param = None):
 		seqData = dl.sequenceDataset('/home/dataset/genome/hg38/devData/testTrain_chrM.fa')
 		seqDataLoader = torch.utils.data.DataLoader(dataset = seqData, batch_size = batchSize, shuffle = shuffle)
 
-		seqModel = m.seqMLP()
+		seqModel = m.seqMLP().to(device)
 		criterion = nn.MSELoss()
 		optimizer = torch.optim.Adam(list(seqModel.parameters()), lr = learningRate)
 		totalStep = len(seqDataLoader)
