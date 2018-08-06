@@ -19,8 +19,8 @@ def train(seqModel, param = None):
 		device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 		batchSize = 1280
 		shuffle = True
-		learningRate = 0.0001
-		epochNum = 10
+		learningRate = 0.00001
+		epochNum = 1000
 
 		seqData = dl.sequenceDataset('/home/dataset/genome/hg38/devData/testTrain_chrM.fa')
 		seqDataLoader = torch.utils.data.DataLoader(dataset = seqData, batch_size = batchSize, shuffle = shuffle)
