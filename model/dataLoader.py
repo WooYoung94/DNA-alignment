@@ -10,10 +10,10 @@ def splitLine(l):
 def seq2vec(s):
 
 	s = s.upper()
-	s = s.replace('A', 1)
-	s = s.replace('G', 2)
-	s = s.replace('T', 3)
-	s = s.replace('C', 4)
+	s = s.replace('A', '1')
+	s = s.replace('G', '2')
+	s = s.replace('T', '3')
+	s = s.replace('C', '4')
 
 	return np.array(list(s), dtype = np.float32)
 
