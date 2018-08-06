@@ -1,5 +1,6 @@
 import os
 import sys
+import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -32,5 +33,5 @@ def test(seqModel):
 
 		y = y.numpy()[0].astype(np.int32)
 		o = out.detach().cpu().numpy()[0].astype(np.int32)
-		
+
 		print('True : [{}/{}], Pred : [{}/{}], Delta : [{}/{}], Loss : {}'.format(y[0], y[1], o[0], o[1], y[0] - o[0], y[1] - o[1], loss.item()))
