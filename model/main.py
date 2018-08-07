@@ -31,6 +31,6 @@ if __name__ == '__main__':
 	testTime = timeit.default_timer() - timeNow
 	print('[info] elapsed time : ', testTime)
 
-	with open(sys.argv[2], 'w') as fs:
+	with open(sys.argv[1], 'w') as fs:
 
 		fs.write(''.join(log))
