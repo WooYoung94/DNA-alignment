@@ -8,10 +8,12 @@ class seqMLP(nn.Module):
 
 		super(seqMLP, self).__init__()
 
-		self.fc1 = nn.Linear(257, 512)
-		self.fc2 = nn.Linear(512, 512)
-		self.fc3 = nn.Linear(512, 512)
-		self.fc4 = nn.Linear(512, 2)
+		self.fc1 = nn.Linear(257, 1024)
+		self.fc2 = nn.Linear(1024, 1024)
+		self.fc3 = nn.Linear(1024, 1024)
+		self.fc4 = nn.Linear(1024, 1024)
+		self.fc5 = nn.Linear(1024, 1024)
+		self.fc6 = nn.Linear(1024, 2)
 
 	def forward(self, s1, s2, gap):
 
@@ -25,5 +27,9 @@ class seqMLP(nn.Module):
 		out = self.fc3(out)
 		out = F.relu(out, inplace = True)	
 		out = self.fc4(out)
+		out = F.relu(out, inplace = True)	
+		out = self.fc5(out)
+		out = F.relu(out, inplace = True)	
+		out = self.fc6(out)
 
 		return out
