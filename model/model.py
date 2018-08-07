@@ -15,10 +15,6 @@ class seqMLP(nn.Module):
 
 	def forward(self, s1, s2, gap):
 
-		print(s1.shape)
-		print(s2.shape)
-		print(gap.shape)
-
 		gap = gap.reshape(-1, 1)
 
 		out = torch.cat((s1, s2, gap), dim = 1)
