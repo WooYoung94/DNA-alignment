@@ -17,12 +17,17 @@ if __name__ == '__main__':
 	with open(sys.argv[1], 'r') as fs:
 
 		seq = fs.read()
+		print(len(seq))
+
+	print(len(seq[:-SEQLENGTH]) + 1)
 
 	for idx in range(len(seq[:-SEQLENGTH]) + 1):
 
 		data.append(getSeqence(seq, idx, SEQLENGTH))
 
-	with open(os.path.join(os.getcwd(), 'testTrain_chr13.fa'), 'w') as fs:
+	print(len(data))
+
+	with open(os.path.join(os.getcwd(), 'testTrain_chrM.fa'), 'w') as fs:
 
 		for idx, val in enumerate(data):
 
