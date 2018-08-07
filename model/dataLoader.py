@@ -1,6 +1,7 @@
 import os
 import sys
 import numpy as np
+import pytorch
 from torch.utils.data import Dataset
 
 def splitLine(l):
@@ -10,11 +11,11 @@ def splitLine(l):
 def seq2vec(s):
 
 	s = s.upper()
-	s = s.replace('A', '1')
-	s = s.replace('G', '2')
-	s = s.replace('T', '3')
-	s = s.replace('C', '4')
-	s = s.replace('N', '5')
+	s = s.replace('A', '0')
+	s = s.replace('G', '1')
+	s = s.replace('T', '2')
+	s = s.replace('C', '3')
+	s = s.replace('N', '4')
 
 	return np.array(list(s), dtype = np.float32)
 

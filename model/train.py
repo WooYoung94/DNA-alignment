@@ -3,6 +3,7 @@ import sys
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from util import get_onehot
 
 import model as m
 import dataLoader as dl
@@ -37,6 +38,9 @@ def train(seqModel, param = None):
 	for epoch in range(epochNum):
 
 		for idx, (s1, s2, g, y) in enumerate(seqDataLoader):
+
+			s1 = get_onehot(s1).view(s1.size(0),-1)
+			s2 = get_onehot(s2).view(s2.size(0),-1)
 
 			s1 = s1.to(device)
 			s2 = s2.to(device)

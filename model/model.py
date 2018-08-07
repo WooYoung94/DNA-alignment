@@ -36,6 +36,8 @@ class seqMLP(nn.Module):
 
 		super(seqMLP, self).__init__()
 
+		self.enc = LinearBlock(128*5, 128, norm='bn')
+
 		self.s1fc1 = LinearBlock(128, 256, norm='bn')
 		self.s1fc2 = LinearBlock(256, 256, norm='bn')
 		self.s1fc3 = LinearBlock(256, 256, norm='bn')
@@ -52,12 +54,15 @@ class seqMLP(nn.Module):
 
 		gap = gap.reshape(-1, 1)
 
-		out1 = seq1
+		out1 = self.enc(seq1)
+		out2 = self.enc(seq2)
+
+		# out1 = seq1
 		out1 = self.s1fc1(out1)
 		out1 = self.s1fc2(out1)
 		out1 = self.s1fc3(out1)
 
-		out2 = seq2
+		# out2 = seq2
 		out2 = self.s1fc1(out2)
 		out2 = self.s1fc2(out2)
 		out2 = self.s1fc3(out2)	

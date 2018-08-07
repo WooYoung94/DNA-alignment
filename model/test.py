@@ -4,6 +4,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from util import get_onehot
 
 import model as m
 import dataLoader as dl
@@ -25,6 +26,9 @@ def test(seqModel):
 	seqModel.eval()
 	
 	for idx, (s1, s2, g, y) in enumerate(seqDataLoader):
+
+		s1 = get_onehot(s1).view(s1.size(0),-1)
+		s2 = get_onehot(s2).view(s2.size(0),-1)
 
 		s11 = s1.to(device)
 		s22 = s2.to(device)
