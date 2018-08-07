@@ -81,6 +81,7 @@ class seqGRU(nn.Module):
 
 	def __init__(seqGRU, self).__init__():
 
+		super(seqGRU, self).__init__()
 		pass
 
 	def forward(self, seq1, seq2, gap):
