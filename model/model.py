@@ -56,6 +56,10 @@ class seqMLP(nn.Module):
 		seq1 = seq1.view(seq1.size(0), -1)
 		seq2 = seq2.view(seq2.size(0), -1)
 
+		print(seq1.shape)
+		print(seq2.shape)
+
+
 		out1 = self.enc(seq1)
 		out2 = self.enc(seq2)
 
