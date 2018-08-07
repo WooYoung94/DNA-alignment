@@ -26,7 +26,8 @@ if __name__ == '__main__':
 
 		for idx, val in enumerate(data):
 
-			pairIdx = (idx + random.randint(MIN_PAIR, MAX_PAIR)) % (len(seq) - MAX_PAIR - SEQLENGTH)
+			gap = random.randint(MIN_PAIR, MAX_PAIR)
+			pairIdx = (idx + gap) % (len(seq) - MAX_PAIR - SEQLENGTH)
 			pair = data[pairIdx]
 
-			fs.write('\t'.join([val, pair, str(idx), str(pairIdx)]) + '\n')
+			fs.write('\t'.join([val, pair, str(gap), str(idx), str(pairIdx)]) + '\n')

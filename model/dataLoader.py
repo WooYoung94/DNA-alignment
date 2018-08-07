@@ -35,7 +35,5 @@ class sequenceDataset(Dataset):
 	def __getitem__(self, idx):
 
 		item = self.data[idx]
-		#x = seq2vec(item[0]), seq2vec(item[1])
-		#y = float(item[2]), float(item[3])
-
-		return seq2vec(item[0]), seq2vec(item[1]), np.array([item[2], item[3]], dtype = np.float32)
+		
+		return seq2vec(item[0]), seq2vec(item[1]), np.array(item[2], dtype = np.float32), np.array([item[3], item[4]], dtype = np.float32)

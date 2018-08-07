@@ -34,14 +34,15 @@ def train(seqModel, param = None):
 
 	for epoch in range(epochNum):
 
-		for idx, (s1, s2, y) in enumerate(seqDataLoader):
+		for idx, (s1, s2, g, y) in enumerate(seqDataLoader):
 
 			s1 = s1.to(device)
 			s2 = s2.to(device)
+			g = g.to(device)
 			y = y.to(device)
 
-			out = seqModel(s1, s2)
-			loss = criterion(out, y)
+			out = seqModel(s1, s2, g)
+			loss = criterion(out, y) + criterion(torch.abs(out[:,0] - out[:,1]), g)
 
 			optimizer.zero_grad()
 			loss.backward()
