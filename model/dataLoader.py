@@ -15,8 +15,12 @@ def seq2vec(s):
 	s = s.replace('T', '2')
 	s = s.replace('C', '3')
 	s = s.replace('N', '4')
+	s = list(s)
 
-	return np.array(list(s), dtype = np.float32)
+	vec = np.zeros((5, len(s)))
+	vec[np.array(s), np.arange(len(s))] = 1
+
+	return vec
 
 class sequenceDataset(Dataset):
 

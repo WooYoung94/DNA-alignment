@@ -27,9 +27,6 @@ def test(seqModel):
 	
 	for idx, (s1, s2, g, y) in enumerate(seqDataLoader):
 
-		s1 = get_onehot(s1).view(s1.size(0),-1)
-		s2 = get_onehot(s2).view(s2.size(0),-1)
-
 		s11 = s1.to(device)
 		s22 = s2.to(device)
 		gg = g.to(device)
