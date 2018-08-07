@@ -32,7 +32,7 @@ def test(seqModel):
 		yy = y.to(device)
 
 		out = seqModel(s11, s22, gg)
-		loss = criterion(out, y) + criterion(torch.abs(out[:,0] - out[:,1]), g)
+		loss = criterion(out, yy) + criterion(torch.abs(out[:,0] - out[:,1]), gg)
 
 		y = y.numpy()[0].astype(np.int32)
 		g = g.numpy()[0].astype(np.int32)
