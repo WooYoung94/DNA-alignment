@@ -16,16 +16,21 @@ import test
 
 if __name__ == '__main__':
 
+	log = ['=']
 	seqModel = m.seqMLP()
 
 	timeNow = timeit.default_timer()
 	print('[info] train start')
-	train.train(seqModel)
+	log = train.train(seqModel) + log
 	trainTime = timeit.default_timer() - timeNow
 	print('[info] elapsed time : ', trainTime)
 
 	timeNow = timeit.default_timer()
 	print('[info] test start')
-	test.test(seqModel)
+	log = log + test.test(seqModel)
 	testTime = timeit.default_timer() - timeNow
 	print('[info] elapsed time : ', testTime)
+
+	with open(sys.argv[2], 'w') as fs:
+
+		fs.write(''.join(log))

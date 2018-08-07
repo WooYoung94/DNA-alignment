@@ -10,6 +10,8 @@ import dataLoader as dl
 
 def test(seqModel):
 
+	log = list()
+
 	device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 	batchSize = 1
 	shuffle = True
@@ -38,3 +40,7 @@ def test(seqModel):
 
 		print('True : [{}/{}], Pred : [{}/{}], Delta : [{}/{}], Gap : [{}/{}], Loss : {}'
 			.format(y[0], y[1], o[0], o[1], y[0] - o[0], y[1] - o[1], np.abs(o[0] - o[1]), g[0], loss.item()))
+		log.append('True : [{}/{}], Pred : [{}/{}], Delta : [{}/{}], Gap : [{}/{}], Loss : {}\n'
+			.format(y[0], y[1], o[0], o[1], y[0] - o[0], y[1] - o[1], np.abs(o[0] - o[1]), g[0], loss.item()))
+
+	return log

@@ -9,6 +9,8 @@ import dataLoader as dl
 
 def train(seqModel, param = None):
 
+	log = list()
+
 	if param:
 
 		pass
@@ -53,7 +55,10 @@ def train(seqModel, param = None):
 			#	print('Epoch : [{}/{}], Step : [{}/{}], Loss : {}'.format(epoch + 1, epochNum, idx + 1, totalStep, loss.item()))
 
 		print('Epoch : [{}/{}], Loss : {}'.format(epoch + 1, epochNum, loss.item()))
+		log.append('Epoch : [{}/{}], Loss : {}\n'.format(epoch + 1, epochNum, loss.item()))
 
 		if epoch % 100 == 0 and epoch > 0:
 
 			torch.save(seqModel.state_dict(), modelPath.format(epoch))
+
+	return log
