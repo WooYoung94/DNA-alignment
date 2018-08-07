@@ -46,9 +46,9 @@ class seqMLP(nn.Module):
 		# self.s2fc2 = LinearBlock(256, 256, norm='none')
 		# self.s2fc3 = LinearBlock(256, 256, norm='none')
 
-		self.fc4 = LinearBlock(513, 256, norm='none')
-		self.fc5 = LinearBlock(256, 256, norm='none')
-		self.fc6 = LinearBlock(256, 2, norm='none')
+		self.fc4 = LinearBlock(257, 128, norm='none')
+		self.fc5 = LinearBlock(128, 128, norm='none')
+		self.fc6 = LinearBlock(128, 2, norm='none')
 
 	def forward(self, seq1, seq2, gap):
 
