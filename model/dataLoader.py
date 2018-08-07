@@ -1,7 +1,6 @@
 import os
 import sys
 import numpy as np
-import pytorch
 from torch.utils.data import Dataset
 
 def splitLine(l):
