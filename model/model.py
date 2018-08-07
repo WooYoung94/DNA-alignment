@@ -8,13 +8,13 @@ class seqMLP(nn.Module):
 
 		super(seqMLP, self).__init__()
 
-		self.s1fc1 = nn.Linear(257, 512)
-		self.s1fc2 = nn.Linear(512, 512)
-		self.s1fc3 = nn.Linear(512, 256)
+		self.s1fc1 = nn.Linear(128, 256)
+		self.s1fc2 = nn.Linear(256, 256)
+		self.s1fc3 = nn.Linear(256, 256)
 		
-		self.s2fc1 = nn.Linear(257, 512)
-		self.s2fc2 = nn.Linear(512, 512)
-		self.s2fc3 = nn.Linear(512, 256)
+		self.s2fc1 = nn.Linear(128, 256)
+		self.s2fc2 = nn.Linear(256, 256)
+		self.s2fc3 = nn.Linear(256, 256)
 
 		self.fc4 = nn.Linear(513, 256)
 		self.fc5 = nn.Linear(256, 256)
