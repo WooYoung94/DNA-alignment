@@ -30,13 +30,31 @@ class LinearBlock(nn.Module):
 		return x
 
 
+class Encoder(nn.Module):
+
+	def __init__(self, input_dim, output_dim, repeat_num=2, norm='none', activation='relu'):
+
+		super(Encoder, self).__init__()
+		layers = []
+		curr_dim = input_dim
+		for _ in range(repeat_num):
+			layers += [LinearBlock(curr_dim, curr_dim//2, norm='none')]
+			curr_dim //= 2
+
+		layers += [LinearBlock(curr_dim, output_dim, norm='none')]
+
+		self.main = nn.Sequential(*layers)
+
+	def forward(self, x):
+		return self.main(x)
+
 class seqMLP(nn.Module):
 
 	def __init__(self):
 
 		super(seqMLP, self).__init__()
 
-		self.enc = LinearBlock(128*5, 128, norm='none')
+		self.enc = Encoder(128*5, 128)
 
 		# self.s1fc1 = LinearBlock(128, 256, norm='none')
 		# self.s1fc2 = LinearBlock(256, 256, norm='none')
