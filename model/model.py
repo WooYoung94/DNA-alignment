@@ -38,10 +38,10 @@ class Encoder(nn.Module):
 		layers = []
 		curr_dim = input_dim
 		for _ in range(repeat_num):
-			layers += [LinearBlock(curr_dim, curr_dim//2, norm='none')]
+			layers += [LinearBlock(curr_dim, curr_dim//2, norm=norm, activation=activation)]
 			curr_dim //= 2
 
-		layers += [LinearBlock(curr_dim, output_dim, norm='none')]
+		layers += [LinearBlock(curr_dim, output_dim, norm=norm, activation=activation)]
 
 		self.main = nn.Sequential(*layers)
 
@@ -54,19 +54,19 @@ class seqMLP(nn.Module):
 
 		super(seqMLP, self).__init__()
 
-		self.enc = Encoder(128*5, 128)
+		self.enc = Encoder(128*5, 128, norm='bn')
 
-		self.s1fc1 = LinearBlock(128, 256, norm='none')
-		self.s1fc2 = LinearBlock(256, 256, norm='none')
-		self.s1fc3 = LinearBlock(256, 256, norm='none')
+		self.s1fc1 = LinearBlock(128, 256, norm='bn')
+		self.s1fc2 = LinearBlock(256, 256, norm='bn')
+		self.s1fc3 = LinearBlock(256, 256, norm='bn')
 		
-		self.s2fc1 = LinearBlock(128, 256, norm='none')
-		self.s2fc2 = LinearBlock(256, 256, norm='none')
-		self.s2fc3 = LinearBlock(256, 256, norm='none')
+		self.s2fc1 = LinearBlock(128, 256, norm='bn')
+		self.s2fc2 = LinearBlock(256, 256, norm='bn')
+		self.s2fc3 = LinearBlock(256, 256, norm='bn')
 
-		self.fc4 = LinearBlock(513, 128, norm='none')
-		self.fc5 = LinearBlock(128, 128, norm='none')
-		self.fc6 = LinearBlock(128, 2, norm='none')
+		self.fc4 = LinearBlock(513, 128, norm='bn')
+		self.fc5 = LinearBlock(128, 128, norm='bn')
+		self.fc6 = LinearBlock(128, 2, norm='bn')
 
 	# def forward(self, seq1, seq2, gap):
 
