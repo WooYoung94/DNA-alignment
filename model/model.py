@@ -20,11 +20,11 @@ class seqMLP(nn.Module):
 		self.fc5 = nn.Linear(256, 256)
 		self.fc6 = nn.Linear(256, 2)
 
-	def forward(self, s1, s2, gap):
+	def forward(self, seq1, seq2, gap):
 
 		gap = gap.reshape(-1, 1)
 
-		out1 = s1
+		out1 = seq1
 		out1 = self.s1fc1(out1)
 		out1 = F.relu(out1, inplace = True)
 		out1 = self.s1fc2(out1)
@@ -32,7 +32,7 @@ class seqMLP(nn.Module):
 		out1 = self.s1fc3(out1)
 		out1 = F.relu(out1, inplace = True)
 
-		out2 = s2
+		out2 = seq2
 		out2 = self.s1fc1(out2)
 		out2 = F.relu(out2, inplace = True)
 		out2 = self.s1fc2(out2)
@@ -48,3 +48,13 @@ class seqMLP(nn.Module):
 		out = self.fc6(out)
 
 		return out
+
+class seqGRU(nn.Module):
+
+	def __init__(seqGRU, self).__init__():
+
+		pass
+
+	def forward(self, seq1, seq2, gap):
+
+		pass
