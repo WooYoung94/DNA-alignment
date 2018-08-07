@@ -56,30 +56,18 @@ class seqMLP(nn.Module):
 
 		self.enc = Encoder(128*5, 128)
 
-		# self.s1fc1 = LinearBlock(128, 256, norm='none')
-		# self.s1fc2 = LinearBlock(256, 256, norm='none')
-		# self.s1fc3 = LinearBlock(256, 256, norm='none')
+		self.s1fc1 = LinearBlock(128, 256, norm='none')
+		self.s1fc2 = LinearBlock(256, 256, norm='none')
+		self.s1fc3 = LinearBlock(256, 256, norm='none')
 		
-		# self.s2fc1 = LinearBlock(128, 256, norm='none')
-		# self.s2fc2 = LinearBlock(256, 256, norm='none')
-		# self.s2fc3 = LinearBlock(256, 256, norm='none')
+		self.s2fc1 = LinearBlock(128, 256, norm='none')
+		self.s2fc2 = LinearBlock(256, 256, norm='none')
+		self.s2fc3 = LinearBlock(256, 256, norm='none')
 
-		self.fc4 = LinearBlock(257, 128, norm='none')
+		self.fc4 = LinearBlock(513, 128, norm='none')
 		self.fc5 = LinearBlock(128, 128, norm='none')
 		self.fc6 = LinearBlock(128, 2, norm='none')
 
-	def forward(self, seq1, seq2, gap):
-
-		gap = gap.reshape(-1, 1)
-		seq1 = seq1.view(seq1.size(0), -1).float()
-		seq2 = seq2.view(seq2.size(0), -1).float()
-
-		out1 = self.enc(seq1)
-		out2 = self.enc(seq2)
-
-		out = self.fc4(torch.cat([out1, out2, gap], dim=1))
-		out = self.fc5(out)
-		return self.fc6(out)
 	# def forward(self, seq1, seq2, gap):
 
 	# 	gap = gap.reshape(-1, 1)
@@ -89,22 +77,34 @@ class seqMLP(nn.Module):
 	# 	out1 = self.enc(seq1)
 	# 	out2 = self.enc(seq2)
 
-	# 	# out1 = seq1
-	# 	out1 = self.s1fc1(out1)
-	# 	out1 = self.s1fc2(out1)
-	# 	out1 = self.s1fc3(out1)
-
-	# 	# out2 = seq2
-	# 	out2 = self.s1fc1(out2)
-	# 	out2 = self.s1fc2(out2)
-	# 	out2 = self.s1fc3(out2)	
-
-	# 	out = torch.cat((out1, out2, gap), dim = 1)
-	# 	out = self.fc4(out)
+	# 	out = self.fc4(torch.cat([out1, out2, gap], dim=1))
 	# 	out = self.fc5(out)
-	# 	out = self.fc6(out)
+	# 	return self.fc6(out)
+	def forward(self, seq1, seq2, gap):
 
-	# 	return out
+		gap = gap.reshape(-1, 1)
+		seq1 = seq1.view(seq1.size(0), -1).float()
+		seq2 = seq2.view(seq2.size(0), -1).float()
+
+		out1 = self.enc(seq1)
+		out2 = self.enc(seq2)
+
+		# out1 = seq1
+		out1 = self.s1fc1(out1)
+		out1 = self.s1fc2(out1)
+		out1 = self.s1fc3(out1)
+
+		# out2 = seq2
+		out2 = self.s1fc1(out2)
+		out2 = self.s1fc2(out2)
+		out2 = self.s1fc3(out2)	
+
+		out = torch.cat((out1, out2, gap), dim = 1)
+		out = self.fc4(out)
+		out = self.fc5(out)
+		out = self.fc6(out)
+
+		return out
 """
 class seqGRU(nn.Module):
 
