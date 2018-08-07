@@ -76,7 +76,7 @@ class seqMLP(nn.Module):
 		out = self.fc6(out)
 
 		return out
-
+"""
 class seqGRU(nn.Module):
 
 	def __init__(seqGRU, self).__init__():
@@ -87,3 +87,4 @@ class seqGRU(nn.Module):
 	def forward(self, seq1, seq2, gap):
 
 		pass
+"""
