@@ -103,19 +103,21 @@ class seqMLP(nn.Module):
 
 		super(seqMLP, self).__init__()
 
-		self.enc = Encoder(128 * 5, 128, norm = 'ln')
+		self.enc = Encoder(128 * 5, 128, norm = 'none')
 
-		self.s1fc1 = LinearBlock(128, 256, norm = 'ln')
-		self.s1fc2 = LinearBlock(256, 256, norm = 'ln')
-		self.s1fc3 = LinearBlock(256, 256, norm = 'ln')
+		self.s1fc1 = LinearBlock(128, 256, norm = 'none')
+		self.s1fc2 = LinearBlock(256, 256, norm = 'none')
+		self.s1fc3 = LinearBlock(256, 256, norm = 'none')
 		
-		self.s2fc1 = LinearBlock(128, 256, norm = 'ln')
-		self.s2fc2 = LinearBlock(256, 256, norm = 'ln')
-		self.s2fc3 = LinearBlock(256, 256, norm = 'ln')
+		self.s2fc1 = LinearBlock(128, 256, norm = 'none')
+		self.s2fc2 = LinearBlock(256, 256, norm = 'none')
+		self.s2fc3 = LinearBlock(256, 256, norm = 'none')
 
-		self.fc4 = LinearBlock(513, 128, norm = 'ln')
-		self.fc5 = LinearBlock(128, 128, norm = 'ln')
-		self.fc6 = LinearBlock(128, 2, norm = 'ln')
+		self.fc4 = LinearBlock(513, 128, norm = 'none')
+		self.fc5 = LinearBlock(128, 128, norm = 'none')
+		self.fc6 = LinearBlock(128, 128, norm = 'none')
+		self.fc7 = LinearBlock(128, 128, norm = 'none')
+		self.fc8 = LinearBlock(128, 2, norm = 'none')
 
 	def forward(self, seq1, seq2, gap):
 
@@ -140,6 +142,8 @@ class seqMLP(nn.Module):
 		out = self.fc4(out)
 		out = self.fc5(out)
 		out = self.fc6(out)
+		out = self.fc7(out)
+		out = self.fc8(out)
 
 		return out
 """
