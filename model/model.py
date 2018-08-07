@@ -19,6 +19,8 @@ class seqMLP(nn.Module):
 		print(s2.shape)
 		print(gap.shape)
 
+		gap = gap.reshape(-1, 1)
+
 		out = torch.cat((s1, s2, gap), dim = 1)
 		out = self.fc1(out)
 		out = F.relu(out, inplace = True)
