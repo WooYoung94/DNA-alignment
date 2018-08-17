@@ -135,7 +135,7 @@ class seqGRU(nn.Module):
 
 	def forward(self, seq):
 
-		seq = seq.view(seq.size(0), 32, -1).float()
+		#seq = seq.view(seq.size(0), 32, -1).float()
 		h0 = torch.zeros(1, seq.size(0), 128).cuda()
 
 		print(seq)
