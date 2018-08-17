@@ -2,7 +2,7 @@ import os
 import sys
 import random
 
-SEQLENGTH = 128
+SEQLENGTH = 32
 MIN_PAIR = 300
 MAX_PAIR = 5000
 
@@ -23,16 +23,22 @@ if __name__ == '__main__':
 
 	for idx in range(len(seq[:-SEQLENGTH]) + 1):
 
-		data.append(getSeqence(seq, idx, SEQLENGTH))
+		cut = getSeqence(seq, idx, SEQLENGTH)
+
+		if 'N' not in cut:
+
+			data.append(cut)
 
 	print(len(data))
 
-	with open(os.path.join(os.getcwd(), 'testTrain_chrM.fa'), 'w') as fs:
+	with open(os.path.join(os.getcwd(), 'test_' + os.path.basename(sys.argv[1]), 'w')) as fs:
 
 		for idx, val in enumerate(data):
 
-			gap = random.randint(MIN_PAIR, MAX_PAIR)
-			pairIdx = (idx + gap) % (len(seq) - MAX_PAIR - SEQLENGTH)
-			pair = data[pairIdx]
+			#gap = random.randint(MIN_PAIR, MAX_PAIR)
+			#pairIdx = (idx + gap) % (len(seq) - MAX_PAIR - SEQLENGTH)
+			#pair = data[pairIdx]
 
-			fs.write('\t'.join([val, pair, str(gap), str(idx), str(pairIdx)]) + '\n')
+			#fs.write('\t'.join([val, pair, str(gap), str(idx), str(pairIdx)]) + '\n')
+
+			fs.write('\t'.join(val, str(idx) + '\n')
