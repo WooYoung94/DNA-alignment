@@ -19,7 +19,7 @@ def seq2vec(s, onehot = True):
 
 	if onehot:
 
-		vec = np.zeros((5, len(s)))
+		vec = np.zeros((4, len(s)))
 		vec[np.array(s, dtype = np.int32), np.arange(len(s))] = 1
 
 		return np.array(vec, dtype = np.int32)
