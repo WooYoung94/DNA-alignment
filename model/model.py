@@ -129,13 +129,13 @@ class seqGRU(nn.Module):
 
 		super(seqGRU, self).__init__()
 		
-		self.gru = nn.GRU(5, 128, 2, batch_first = True, bidirectional = True)
-		self.fc = nn.Linear(256, 1)
+		self.gru = nn.GRU(5, 128, 2, batch_first = True, bidirectional = False)
+		self.fc = nn.Linear(128, 1)
 
 	def forward(self, seq):
 
 		seq = seq.view(seq.size(0), 32, -1).float()
-		h0 = torch.zeros(2, seq.size(0), 128 * 2)
+		h0 = torch.zeros(2, seq.size(0), 128)
 
 		print(seq.shape)
 		print(h0.shape)
