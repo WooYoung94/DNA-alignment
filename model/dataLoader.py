@@ -22,8 +22,6 @@ def seq2vec(s, onehot = True):
 		vec = np.zeros((4, len(s)))
 		vec[np.array(s, dtype = np.int32), np.arange(len(s))] = 1
 
-		print(vec)
-
 		return np.array(vec, dtype = np.int32)
 
 	else:
