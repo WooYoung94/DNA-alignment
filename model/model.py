@@ -141,6 +141,6 @@ class seqGRU(nn.Module):
 		out = self.fc(out[:, -1, :])
 
 		print(seq)
-		print(out)
+		print(out[:, -1, :])
 
 		return out
