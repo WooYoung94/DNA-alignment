@@ -125,7 +125,7 @@ class seqMLP(nn.Module):
 
 class seqGRU(nn.Module):
 
-	def __init__(seqGRU, self).__init__():
+	def __init__(self):
 
 		super(seqGRU, self).__init__()
 		
