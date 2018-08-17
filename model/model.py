@@ -138,7 +138,7 @@ class seqGRU(nn.Module):
 
 		h0 = torch.zeros(2, seq.size(0), 128 * 2)
 
-		out, _ = self.gru(x, h0)
+		out, _ = self.gru(seq, h0)
 		out = self.fc(out[:, -1, :])
 
 		return out
