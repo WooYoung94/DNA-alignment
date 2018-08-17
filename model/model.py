@@ -140,4 +140,6 @@ class seqGRU(nn.Module):
 		out, _ = self.gru(seq, h0)
 		out = self.fc(out[:, -1, :])
 
+		print(out)
+
 		return out
