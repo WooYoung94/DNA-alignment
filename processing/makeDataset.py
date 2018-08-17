@@ -42,3 +42,4 @@ if __name__ == '__main__':
 			#fs.write('\t'.join([val, pair, str(gap), str(idx), str(pairIdx)]) + '\n')
 
 			fs.write('\t'.join(val, str(idx) + '\n')
+				
