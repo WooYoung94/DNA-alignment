@@ -47,4 +47,4 @@ class sequenceDataset(Dataset):
 		item = self.data[idx]
 
 		#return seq2vec(item[0]), seq2vec(item[1]), np.array(item[2], dtype = np.float32), np.array([item[3], item[4]], dtype = np.float32)
-		return seq2vec(item[0]), np.array(item[1], dtype = np.float32)
+		return seq2vec(item[0]), np.array([item[1]], dtype = np.float32)
