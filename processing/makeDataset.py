@@ -31,7 +31,7 @@ if __name__ == '__main__':
 
 	print(len(data))
 
-	with open(os.path.join(os.getcwd(), 'test_' + os.path.basename(sys.argv[1]), 'w')) as fs:
+	with open(os.path.join(os.getcwd(), 'testChr.fa', 'w')) as fs:
 
 		for idx, val in enumerate(data):
 
@@ -41,4 +41,4 @@ if __name__ == '__main__':
 
 			#fs.write('\t'.join([val, pair, str(gap), str(idx), str(pairIdx)]) + '\n')
 
-			fs.write('\t'.join(val, str(idx) + '\n'))
+			fs.write('\t'.join(val, str(idx)) + '\n')
