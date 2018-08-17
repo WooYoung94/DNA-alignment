@@ -121,15 +121,24 @@ class seqMLP(nn.Module):
 		out = self.main(out)
 
 		return out
-"""
+
+
 class seqGRU(nn.Module):
 
 	def __init__(seqGRU, self).__init__():
 
 		super(seqGRU, self).__init__()
-		pass
+		
+		self.gru = nn.GRU(5, 128, 2, batch_first = True, bidirectional = True)
+		self.fc = nn.Linear(256, 1)
 
-	def forward(self, seq1, seq2, gap):
+	def forward(self, seq):
 
-		pass
-"""
+		seq = seq.view(seq.size(0), -1).float()
+
+		h0 = torch.zeros(2, seq.size(0), 128 * 2)
+
+		out, _ = self.gru(x, h0)
+		out = self.fc(out[:, -1, :])
+
+		return out
