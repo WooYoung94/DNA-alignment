@@ -21,7 +21,7 @@ def train(seqModel, param = None):
 
 		modelPath = '/home/youngwoo/Documents/models/DNA/model_epoch{}.model'
 		device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-		batchSize = 1
+		batchSize = 1024
 		shuffle = True
 		learningRate = 0.0001
 		epochNum = 2000
@@ -45,9 +45,6 @@ def train(seqModel, param = None):
 
 			out = seqModel(s)
 			loss = criterion(out, y)
-
-			print(s)
-			print(out * MAX_LENGTH, y * MAX_LENGTH)
 
 			optimizer.zero_grad()
 			loss.backward()
