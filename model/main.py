@@ -10,10 +10,6 @@ import dataLoader as dl
 import train
 import test
 
-
-
-
-
 if __name__ == '__main__':
 
 	log = ['=']

@@ -25,23 +25,21 @@ def test(seqModel):
 	seqModel = seqModel.to(device)
 	seqModel.eval()
 	
-	for idx, (s1, s2, g, y) in enumerate(seqDataLoader):
+	for idx, (s, y) in enumerate(seqDataLoader):
 
-		s11 = s1.to(device)
-		s22 = s2.to(device)
-		gg = g.to(device)
-		yy = y.to(device)
+		s = s.to(device)
+		y = y.to(device)
 
-		out = seqModel(s11, s22, gg)
-		loss = criterion(out, yy) + criterion(torch.abs(out[:,0] - out[:,1]), gg)
+		out = seqModel(s)
+		loss = criterion(out, y)
 
 		y = y.numpy()[0].astype(np.int32)
-		g = g.numpy()[0].astype(np.int32)
 		o = out.detach().cpu().numpy()[0].astype(np.int32)
 
-		#print('True : [{}/{}], Pred : [{}/{}], Delta : [{}/{}], Gap : [{}/{}], Loss : {}'
-		#	.format(y[0], y[1], o[0], o[1], y[0] - o[0], y[1] - o[1], np.abs(o[0] - o[1]), g, loss.item()))
-		log.append('True : [{}/{}], Pred : [{}/{}], Delta : [{}/{}], Gap : [{}/{}], Loss : {}\n'
-			.format(y[0], y[1], o[0], o[1], y[0] - o[0], y[1] - o[1], np.abs(o[0] - o[1]), g, loss.item()))
+
+		print('True/Pred : [{}/{}], Loss : {}'
+			.format(y, out, loss.item()))
+		log.append('True/Pred : [{}/{}], Loss : {}\n'
+			.format(y, out, loss.item()))
 
 	return log
