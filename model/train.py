@@ -7,6 +7,8 @@ import torch.nn.functional as F
 import model as m
 import dataLoader as dl
 
+MAX_LENGTH = 16505
+
 def train(seqModel, param = None):
 
 	log = list()
@@ -39,7 +41,7 @@ def train(seqModel, param = None):
 		for idx, (s, y) in enumerate(seqDataLoader):
 
 			s = s.to(device)
-			y = y.to(device)
+			y = (y / MAX_LENGTH).to(device)
 
 			out = seqModel(s)
 			loss = criterion(out, y)
@@ -47,10 +49,6 @@ def train(seqModel, param = None):
 			optimizer.zero_grad()
 			loss.backward()
 			optimizer.step()
-
-			#if (idx + 1) % 100 == 0:
-			#
-			#	print('Epoch : [{}/{}], Step : [{}/{}], Loss : {}'.format(epoch + 1, epochNum, idx + 1, totalStep, loss.item()))
 
 		print('Epoch : [{}/{}], Loss : {}'.format(epoch + 1, epochNum, loss.item()))
 		log.append('Epoch : [{}/{}], Loss : {}\n'.format(epoch + 1, epochNum, loss.item()))
