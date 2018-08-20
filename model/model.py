@@ -133,6 +133,7 @@ class seqGRU(nn.Module):
 		self.fc1 = nn.Linear(256, 64)
 		self.fc2 = nn.Linear(64, 1)
 		self.sigmoid = nn.Sigmoid()
+		self.relu = nn.ReLU(inplace = True)
 
 	def forward(self, seq):
 
@@ -141,6 +142,7 @@ class seqGRU(nn.Module):
 
 		out, _ = self.gru(seq, h0)
 		out = self.fc1(out[:, -1, :])
+		out = self.relu(out)
 		out = self.fc2(out)
 		out = self.sigmoid(out)
 
