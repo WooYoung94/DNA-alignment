@@ -32,7 +32,7 @@ def test(seqModel):
 		out = seqModel(s)
 		loss = criterion(out, y)
 
-		y = y.numpy()[0].astype(np.int32)
+		y = y.numpy()[0].cpu().astype(np.int32)
 		o = out.detach().cpu().numpy()[0].astype(np.int32)
 
 

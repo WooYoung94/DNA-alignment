@@ -24,7 +24,7 @@ def train(seqModel, param = None):
 		batchSize = 1024
 		shuffle = True
 		learningRate = 0.0001
-		epochNum = 2000
+		epochNum = 1
 
 		seqData = dl.sequenceDataset('/home/dataset/genome/hg38/devData/test_chrM.fa')
 		seqDataLoader = torch.utils.data.DataLoader(dataset = seqData, batch_size = batchSize, shuffle = shuffle)
