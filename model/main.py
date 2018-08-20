@@ -24,7 +24,13 @@ if __name__ == '__main__':
 
 	timeNow = timeit.default_timer()
 	print('[info] test start')
-	log = log + test.test(seqModel)
+	log = log + test.test(seqModel, batchSize = 1)
+	testTime = timeit.default_timer() - timeNow
+	print('[info] elapsed time : ', testTime)
+
+	timeNow = timeit.default_timer()
+	print('[info] inference test start')
+	test.test(seqModel, batchSize = 18000)
 	testTime = timeit.default_timer() - timeNow
 	print('[info] elapsed time : ', testTime)
 
