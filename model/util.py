@@ -23,14 +23,10 @@ if __name__ == '__main__':
 
 		for t in text:
 
-			l1 = t.split(',')[0].split(':')[-1].strip().split('/')[0][2:-1]
-			l2 = t.split(',')[0].split(':')[-1].strip().split('/')[1][1:-2]
+			l1 = int(t.split(',')[0].split(':')[-1].strip().split('/')[0][2:-1])
+			l2 = int(t.split(',')[0].split(':')[-1].strip().split('/')[1][1:-2])
 			log.append((l1, l2))
 
 		log.sort()
-
-	else:
-
-		pass
 
 	print(log)
