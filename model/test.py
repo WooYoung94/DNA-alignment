@@ -8,6 +8,8 @@ import torch.nn.functional as F
 import model as m
 import dataLoader as dl
 
+MAX_LENGTH = 16505
+
 def test(seqModel):
 
 	log = list()
@@ -29,7 +31,7 @@ def test(seqModel):
 		s = s.to(device)
 		y = y.to(device)
 
-		out = seqModel(s)
+		out = seqModel(s) * MAX_LENGTH
 		loss = criterion(out, y)
 
 		y = y.cpu().numpy()[0].astype(np.int32)
