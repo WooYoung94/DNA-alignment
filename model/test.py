@@ -37,8 +37,8 @@ def test(seqModel):
 
 
 		print('True/Pred : [{}/{}], Loss : {}'
-			.format(y, out, loss.item()))
+			.format(y, o, loss.item()))
 		log.append('True/Pred : [{}/{}], Loss : {}\n'
-			.format(y, out, loss.item()))
+			.format(y, o, loss.item()))
 
 	return log
