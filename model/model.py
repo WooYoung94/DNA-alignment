@@ -129,15 +129,15 @@ class seqGRU(nn.Module):
 
 		super(seqGRU, self).__init__()
 		
-		self.gru = nn.GRU(4, 128, 1, batch_first = True, bidirectional = False)
-		self.fc1 = nn.Linear(128, 64)
+		self.gru = nn.GRU(4, 256, 1, batch_first = True, bidirectional = False)
+		self.fc1 = nn.Linear(256, 64)
 		self.fc2 = nn.Linear(64, 1)
 		self.sigmoid = nn.Sigmoid()
 
 	def forward(self, seq):
 
 		seq = torch.transpose(seq, 1, 2).float()
-		h0 = torch.zeros(1, seq.size(0), 128).cuda()
+		h0 = torch.zeros(1, seq.size(0), 256).cuda()
 
 		out, _ = self.gru(seq, h0)
 		out = self.fc1(out[:, -1, :])
