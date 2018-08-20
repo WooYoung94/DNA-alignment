@@ -147,3 +147,29 @@ class seqGRU(nn.Module):
 		out = self.sigmoid(out)
 
 		return out
+
+class seqLSTM(nn.Module):
+
+	def __init__(self):
+
+		super(seqLSTM, self).__init__()
+		
+		self.lstm = nn.LSTM(4, 256, 1, batch_first = True, bidirectional = False)
+		self.fc1 = nn.Linear(256, 64)
+		self.fc2 = nn.Linear(64, 1)
+		self.sigmoid = nn.Sigmoid()
+		self.relu = nn.ReLU(inplace = True)
+
+	def forward(self, seq):
+
+		seq = torch.transpose(seq, 1, 2).float()
+		h0 = torch.zeros(1, seq.size(0), 256).cuda()
+		c0 = torch.zeros(1, seq.size(0), 256).cuda()
+
+		out, _ = self.lstm(seq, (h0, c0))
+		out = self.fc1(out[:, -1, :])
+		out = self.relu(out)
+		out = self.fc2(out)
+		out = self.sigmoid(out)
+
+		return out

@@ -21,7 +21,7 @@ def train(seqModel, param = None):
 
 		modelPath = '/home/youngwoo/Documents/models/DNA/model_epoch{}.model'
 		device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-		batchSize = 1024
+		batchSize = 5120
 		shuffle = True
 		learningRate = 0.0001
 		epochNum = 2000
