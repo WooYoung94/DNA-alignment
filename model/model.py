@@ -144,6 +144,6 @@ class seqGRU(nn.Module):
 		out = self.fc1(out[:, -1, :])
 		out = self.relu(out)
 		out = self.fc2(out)
-		out = self.sigmoid(out) * 0.8 + 0.1
+		out = self.sigmoid(out) * 0.6 + 0.2
 
 		return out

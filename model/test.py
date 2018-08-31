@@ -30,7 +30,7 @@ def test(seqModel, batchSize = 1):
 		s = s.to(device)
 		y = y.to(device)
 
-		out = ((seqModel(s) - 0.1) / 0.8) * MAX_LENGTH
+		out = ((seqModel(s) - 0.2) / 0.6) * MAX_LENGTH
 		loss = criterion(out, y)
 
 		y = y.cpu().numpy()[0].astype(np.int32)
