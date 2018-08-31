@@ -1,3 +1,6 @@
+# preprocess.py
+# hg reference fa 파일을 염색체 별로 나누어 저장
+
 import os
 import sys
 
