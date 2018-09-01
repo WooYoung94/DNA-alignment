@@ -41,7 +41,7 @@ def train(seqModel, param = None):
 		for idx, (s, y) in enumerate(seqDataLoader):
 
 			s = s.to(device)
-			y = ((y / MAX_LENGTH) * 0.8 + 0.1).to(device)
+			y = ((y / MAX_LENGTH) * 0.6 + 0.2).to(device)
 
 			out = seqModel(s)
 			loss = criterion(out, y)
