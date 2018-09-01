@@ -44,3 +44,38 @@ def test(seqModel, batchSize = 1):
 				.format(y, o, loss.item()))
 
 	return log
+
+def testVariant(seqModel, batchSize = 1):
+
+	log = list()
+
+	device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+	shuffle = True
+
+	seqData = dl.sequenceDataset('/home/dataset/genome/hg38/devData/variant_chrM.fa')
+	seqDataLoader = torch.utils.data.DataLoader(dataset = seqData, batch_size = batchSize, shuffle = shuffle)
+
+	criterion = nn.MSELoss()
+
+	seqModel = seqModel.to(device)
+	seqModel.eval()
+	
+	for idx, (s, y) in enumerate(seqDataLoader):
+
+		s = s.to(device)
+		y = y.to(device)
+
+		out = ((seqModel(s) - 0.2) / 0.6) * MAX_LENGTH
+		loss = criterion(out, y)
+
+		y = y.cpu().numpy()[0].astype(np.int32)
+		o = out.detach().cpu().numpy()[0].astype(np.int32)
+
+		if batchSize == 1:
+
+			print('True/Pred : [{}/{}], Loss : {}'
+				.format(y, o, loss.item()))
+			log.append('True/Pred : [{}/{}], Loss : {}\n'
+				.format(y, o, loss.item()))
+
+	return log
