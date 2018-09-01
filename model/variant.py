@@ -18,7 +18,7 @@ if __name__ == '__main__':
 	#seqModel = m.seqLSTM()
 
 	print('[info] load {}'.format(sys.argv[1]))
-	model.load_state_dict(torch.load(sys.argv[1]))
+	seqModel.load_state_dict(torch.load(sys.argv[1]))
 
 	timeNow = timeit.default_timer()
 	print('[info] test start')
