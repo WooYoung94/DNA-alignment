@@ -53,7 +53,7 @@ def train(seqModel, param = None):
 		print('Epoch : [{}/{}], Loss : {}'.format(epoch + 1, epochNum, loss.item()))
 		log.append('Epoch : [{}/{}], Loss : {}\n'.format(epoch + 1, epochNum, loss.item()))
 
-		if epoch % 100 == 0 and epoch > 0:
+		if (epoch + 1) % 100 == 0 and epoch > 0:
 
 			torch.save(seqModel.state_dict(), modelPath.format(epoch))
 
