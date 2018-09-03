@@ -190,10 +190,16 @@ class seqCNN(nn.Module):
 		super(seqCNN, self).__init__()
 
 		self.enc = nn.Conv2d(1, 64, (4, 3), stride = 1, padding = (0, 1))
-		self.res1 = resBlock1D(64, 128, 3)
-		self.res2 = resBlock1D(128, 256, 3)
-		self.res3 = resBlock1D(256, 512, 3)
-		self.res4 = resBlock1D(512, 1024, 3)
+		#self.res1 = resBlock1D(64, 128, 3)
+		#self.res2 = resBlock1D(128, 256, 3)
+		#self.res3 = resBlock1D(256, 512, 3)
+		#self.res4 = resBlock1D(512, 1024, 3)
+
+		self.res1 = nn.Conv1d(64, 128, 3, padding = 1)
+		self.res2 = nn.Conv1d(128, 256, 3, padding = 1)
+		self.res3 = nn.Conv1d(256, 512, 3, padding = 1)
+		self.res4 = nn.Conv1d(512, 1024, 3, padding = 1)
+
 		self.conv1 = nn.Conv1d(1024, 1, 32)
 		self.sigmoid = nn.Sigmoid()
 
