@@ -185,7 +185,7 @@ class seqCNN(nn.Module):
 	def forward(self, seq):
 
 		#seq = torch.transpose(seq, 1, 2).float().view(seq.size(0), 1, seq.size())
-		seq = seq.view(seq.size(0), 1, seq.size(1), seq.size(2))
+		seq = seq.float().view(seq.size(0), 1, seq.size(1), seq.size(2))
 
 		print(seq.shape)
 		
