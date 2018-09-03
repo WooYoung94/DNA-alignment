@@ -166,6 +166,9 @@ class resBlock1D(nn.Module):
 		out = self.relu(out)
 		out = self.conv2(out)
 		out = self.bn2(out)
+
+		print(out.shape)
+		print(x.shape)
 		out = out + x
 		out = self.relu(out)
 
