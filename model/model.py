@@ -153,7 +153,11 @@ class resBlock1D(nn.Module):
 
 		super(resBlock1D, self).__init__()
 
-		self.conv1 = nn.Conv1d(inDim, outDim, size, stride = stride, padding = 1, bias = False)
+		self.inDim = inDim
+		self.outDim = outDim
+
+		self.conv0 = nn.Conv1d(inDim, outDim, size, stride = stride, padding = 1, bias = False)
+		self.conv1 = nn.Conv1d(outDim, outDim, size, stride = stride, padding = 1, bias = False)
 		self.bn1 = nn.BatchNorm1d(outDim)
 		self.conv2 = nn.Conv1d(outDim, outDim, size, stride = stride, padding = 1, bias = False)
 		self.bn2 = nn.BatchNorm1d(outDim)
@@ -161,6 +165,10 @@ class resBlock1D(nn.Module):
 
 	def forward(self, x):
 
+		if self.inDim != self.outDim:
+
+			x = self.conv0(x)
+			
 		out = self.conv1(x)
 		out = self.bn1(out)
 		out = self.relu(out)
