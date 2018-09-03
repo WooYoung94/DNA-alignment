@@ -199,6 +199,7 @@ class seqCNN(nn.Module):
 		self.res2 = nn.Conv1d(128, 256, 3, padding = 1)
 		self.res3 = nn.Conv1d(256, 512, 3, padding = 1)
 		self.res4 = nn.Conv1d(512, 1024, 3, padding = 1)
+		self.relu = nn.ReLU(inplace = True)
 
 		self.conv1 = nn.Conv1d(1024, 1, 32)
 		self.sigmoid = nn.Sigmoid()
@@ -210,10 +211,17 @@ class seqCNN(nn.Module):
 		
 		out = self.enc(seq)
 		out = out.view(out.size(0), out.size(1), out.size(3))
-		out = self.res1(out)
-		out = self.res2(out)
-		out = self.res3(out)
-		out = self.res4(out)
+		
+		#out = self.res1(out)
+		#out = self.res2(out)
+		#out = self.res3(out)
+		#out = self.res4(out)
+		
+		out = self.relu(self.res1(out))
+		out = self.relu(self.res2(out))
+		out = self.relu(self.res3(out))
+		out = self.relu(self.res4(out))
+
 		out = self.conv1(out)
 		out = self.sigmoid(out) * 0.6 + 0.2
 		out = out.view(out.size(0), out.size(1))
