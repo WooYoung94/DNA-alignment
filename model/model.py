@@ -122,7 +122,6 @@ class seqMLP(nn.Module):
 
 		return out
 
-
 class seqGRU(nn.Module):
 
 	def __init__(self):
@@ -147,3 +146,26 @@ class seqGRU(nn.Module):
 		out = self.sigmoid(out) * 0.6 + 0.2
 
 		return out
+
+class resBlock1D(nn.Module):
+
+	def __init__(self, inDim, outDim, size):
+
+		pass
+
+	def forward(self, x):
+
+		return asdf
+
+class seqCNN(nn.Module):
+
+	def __init__(self):
+
+		super(seqCNN, self).__init__()
+
+		self.conv1 = nn.Conv2d(1, 64, (4, 3), stride = 1)
+		self.conv2 = nn.Conv1d()
+
+	def forward(self, seq):
+
+		return seq
