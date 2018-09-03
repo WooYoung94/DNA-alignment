@@ -190,8 +190,9 @@ class seqCNN(nn.Module):
 
 		self.enc = nn.Conv2d(1, 64, (4, 3), stride = 1, padding = (0, 1))
 		self.res1 = resBlock1D(64, 128, 3)
-		self.res2 = resBlock1D(128, 512, 3)
-		self.res3 = resBlock1D(512, 1, 32)
+		self.res2 = resBlock1D(128, 256, 3)
+		self.res3 = resBlock1D(256, 512, 32)
+		self.conv1 = nn.Conv1D(512, 1, 1)
 
 	def forward(self, seq):
 
@@ -202,7 +203,8 @@ class seqCNN(nn.Module):
 		out = out.view(out.size(0), out.size(1), out.size(3))
 		out = self.res1(out)
 		out = self.res2(out)
-		print(out.shape)
 		out = self.res3(out)
+		out = self.conv1(out)
+
 
 		return out
