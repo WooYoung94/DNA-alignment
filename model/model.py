@@ -149,13 +149,27 @@ class seqGRU(nn.Module):
 
 class resBlock1D(nn.Module):
 
-	def __init__(self, inDim, outDim, size):
+	def __init__(self, inDim, outDim, size = 3, stride = 1):
 
-		pass
+		super(resBlock1D, self).__init__()
+
+		self.conv1 = nn.Conv1d(inDim, outDim, size, stride = stride, padding = 1, bias = False)
+		self.bn1 = nn.BatchNorm1d(outDim)
+		self.conv2 = nn.Conv1d(outDim, outDim, size, stride = stride, padding = 1, bias = False)
+		self.bn2 = nn.BatchNorm1d(outDim)
+		self.relu = nn.ReLU(inplce = True)
 
 	def forward(self, x):
 
-		return asdf
+		out = self.conv1(x)
+		out = self.bn1(out)
+		out = self.relu(out)
+		out = self.conv2(out)
+		out = self.bn2(out)
+		out = out + x
+		out = self.relu(out)
+
+		return out
 
 class seqCNN(nn.Module):
 
@@ -163,9 +177,18 @@ class seqCNN(nn.Module):
 
 		super(seqCNN, self).__init__()
 
-		self.conv1 = nn.Conv2d(1, 64, (4, 3), stride = 1)
-		self.conv2 = nn.Conv1d()
+		self.enc = nn.Conv2d(1, 64, (4, 3), stride = 1)
+		self.res1 = resBlock1D(64, 128, 3)
+		self.res2 = resBlock1D(128, 512, 3)
+		self.res3 = resBlock1D(512, 1, 32)
 
 	def forward(self, seq):
 
-		return seq
+		seq = torch.transpose(seq, 1, 2).float()
+		
+		out = self.enc(seq)
+		out = self.res1(out)
+		out = self.res2(out)
+		out = self.res3(out)
+
+		return out

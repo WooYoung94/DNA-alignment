@@ -14,7 +14,8 @@ if __name__ == '__main__':
 
 	log = ['=']
 	#seqModel = m.seqMLP()
-	seqModel = m.seqGRU()
+	#seqModel = m.seqGRU()
+	seqModel = m.seqCNN()
 
 	timeNow = timeit.default_timer()
 	print('[info] train start')

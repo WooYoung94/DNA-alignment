@@ -14,8 +14,8 @@ if __name__ == '__main__':
 
 	log = ['=']
 	#seqModel = m.seqMLP()
-	seqModel = m.seqGRU()
-	#seqModel = m.seqLSTM()
+	#seqModel = m.seqGRU()
+	seqModel = m.seqCNN()
 
 	print('[info] load {}'.format(sys.argv[1]))
 	seqModel.load_state_dict(torch.load(sys.argv[1]))
