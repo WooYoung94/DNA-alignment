@@ -157,6 +157,7 @@ class resBlock1D(nn.Module):
 		self.outDim = outDim
 
 		self.conv0 = nn.Conv1d(inDim, outDim, size, stride = stride, padding = 1, bias = False)
+		self.bn0 = nn.BatchNorm1d(outDim)
 		self.conv1 = nn.Conv1d(outDim, outDim, size, stride = stride, padding = 1, bias = False)
 		self.bn1 = nn.BatchNorm1d(outDim)
 		self.conv2 = nn.Conv1d(outDim, outDim, size, stride = stride, padding = 1, bias = False)
@@ -168,15 +169,14 @@ class resBlock1D(nn.Module):
 		if self.inDim != self.outDim:
 
 			x = self.conv0(x)
-			
+			x = self.bn0(x)
+
 		out = self.conv1(x)
 		out = self.bn1(out)
 		out = self.relu(out)
 		out = self.conv2(out)
 		out = self.bn2(out)
 
-		print(out.shape)
-		print(x.shape)
 		out = out + x
 		out = self.relu(out)
 
@@ -202,6 +202,7 @@ class seqCNN(nn.Module):
 		out = out.view(out.size(0), out.size(1), out.size(3))
 		out = self.res1(out)
 		out = self.res2(out)
+		print(out.shape)
 		out = self.res3(out)
 
 		return out
