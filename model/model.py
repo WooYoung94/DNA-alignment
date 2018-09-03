@@ -157,7 +157,7 @@ class resBlock1D(nn.Module):
 		self.bn1 = nn.BatchNorm1d(outDim)
 		self.conv2 = nn.Conv1d(outDim, outDim, size, stride = stride, padding = 1, bias = False)
 		self.bn2 = nn.BatchNorm1d(outDim)
-		self.relu = nn.ReLU(inplce = True)
+		self.relu = nn.ReLU(inplace = True)
 
 	def forward(self, x):
 
