@@ -129,7 +129,7 @@ class seqGRU(nn.Module):
 		super(seqGRU, self).__init__()
 		
 		self.gru = nn.GRU(4, 256, 2, batch_first = True, bidirectional = True, dropout = 0.1)
-		self.fc1 = nn.Linear(256, 64)
+		self.fc1 = nn.Linear(512, 64)
 		self.fc2 = nn.Linear(64, 1)
 		self.sigmoid = nn.Sigmoid()
 		self.relu = nn.ReLU(inplace = True)
