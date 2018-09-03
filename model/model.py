@@ -208,5 +208,6 @@ class seqCNN(nn.Module):
 		out = self.res3(out)
 		out = self.conv1(out)
 		out = self.sigmoid(out) * 0.6 + 0.2
+		out = out.view(out.size(0), out.size(1))
 
 		return out
