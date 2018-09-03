@@ -199,10 +199,10 @@ class seqCNN(nn.Module):
 		seq = seq.float().view(seq.size(0), 1, seq.size(1), seq.size(2))
 		
 		out = self.enc(seq)
+		print(out.shape)
 		out = out.view(out.size(0), out.size(1), out.size(3))
 		out = self.res1(out)
 		out = self.res2(out)
-		print(out.shape)
 		out = self.res3(out)
 
 		return out
