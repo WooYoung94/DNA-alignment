@@ -188,7 +188,7 @@ class seqCNN(nn.Module):
 
 		super(seqCNN, self).__init__()
 
-		self.enc = nn.Conv2d(1, 64, (4, 3), stride = 1)
+		self.enc = nn.Conv2d(1, 64, (4, 3), stride = 1, padding = 1)
 		self.res1 = resBlock1D(64, 128, 3)
 		self.res2 = resBlock1D(128, 512, 3)
 		self.res3 = resBlock1D(512, 1, 32)
