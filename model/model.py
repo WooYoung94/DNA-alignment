@@ -192,7 +192,8 @@ class seqCNN(nn.Module):
 		self.res1 = resBlock1D(64, 128, 3)
 		self.res2 = resBlock1D(128, 256, 3)
 		self.res3 = resBlock1D(256, 512, 32)
-		self.conv1 = nn.Conv1D(512, 1, 1)
+		self.conv1 = nn.Conv1d(512, 1, 1)
+		self.sigmoid = nn.Sigmoid()
 
 	def forward(self, seq):
 
@@ -205,6 +206,6 @@ class seqCNN(nn.Module):
 		out = self.res2(out)
 		out = self.res3(out)
 		out = self.conv1(out)
-
+		out = self.sigmoid(out) * 0.6 + 0.2
 
 		return out
