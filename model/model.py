@@ -186,10 +186,8 @@ class seqCNN(nn.Module):
 
 		#seq = torch.transpose(seq, 1, 2).float().view(seq.size(0), 1, seq.size())
 		seq = seq.float().view(seq.size(0), 1, seq.size(1), seq.size(2))
-
-		print(seq.shape)
 		
-		out = self.enc(seq)
+		out = self.enc(seq).view(seq.size(0), seq.size(1), seq.size(3))
 		out = self.res1(out)
 		out = self.res2(out)
 		out = self.res3(out)
