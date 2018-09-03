@@ -170,8 +170,8 @@ class resBlock1D(nn.Module):
 
 			x = self.conv0(x)
 			x = self.bn0(x)
+			x = self.relu(x)
 
-		print(x.shape)
 		out = self.conv1(x)
 		out = self.bn1(out)
 		out = self.relu(out)
@@ -192,8 +192,8 @@ class seqCNN(nn.Module):
 		self.enc = nn.Conv2d(1, 64, (4, 3), stride = 1, padding = (0, 1))
 		self.res1 = resBlock1D(64, 128, 3)
 		self.res2 = resBlock1D(128, 256, 3)
-		self.res3 = resBlock1D(256, 512, 32)
-		self.conv1 = nn.Conv1d(512, 1, 1)
+		self.res3 = resBlock1D(256, 512, 3)
+		self.conv1 = nn.Conv1d(512, 1, 32)
 		self.sigmoid = nn.Sigmoid()
 
 	def forward(self, seq):
