@@ -14,8 +14,8 @@ if __name__ == '__main__':
 
 	log = ['=']
 	#seqModel = m.seqMLP()
-	seqModel = m.seqGRU()
-	#seqModel = m.seqCNN()
+	#seqModel = m.seqGRU()
+	seqModel = m.seqCNN()
 
 	print('[info] load {}'.format(sys.argv[1]))
 	seqModel.load_state_dict(torch.load(sys.argv[1]))
@@ -28,7 +28,7 @@ if __name__ == '__main__':
 
 	timeNow = timeit.default_timer()
 	print('[info] inference test start')
-	test.test(seqModel, batchSize = 18000)
+	test.test(seqModel, batchSize = 2048)
 	testTime = timeit.default_timer() - timeNow
 	print('[info] elapsed time : ', testTime)
 
