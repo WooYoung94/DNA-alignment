@@ -211,11 +211,11 @@ class seqCNN(nn.Module):
 		out = self.relu(self.res3(out))
 		out = self.res4(out)
 
-		#out, mu, logvar = self.reparam(out)
+		out, mu, logvar = self.reparam(out)
 
 		out = self.conv1(out)
 		out = self.sigmoid(out)
 		out = out.view(out.size(0), out.size(1))
 
-		#return out, mu, logvar
-		return out
+		return out, mu, logvar
+		#return out
