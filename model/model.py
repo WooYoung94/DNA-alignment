@@ -120,7 +120,8 @@ class seqGRU(nn.Module):
 		out = self.relu(out)
 		out = self.fc1_drop(out)
 		out = self.fc2(out)
-		out = self.sigmoid(out)
+		#out = self.sigmoid(out)
+		out = self.relu(out)
 
 		return out
 

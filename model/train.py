@@ -23,7 +23,7 @@ def train(seqModel, param = None):
 
 	else:
 
-		modelPath = '/home/youngwoo/Documents/models/DNA/cnn_VAE_model_epoch{}.model'
+		modelPath = '/home/youngwoo/Documents/models/DNA/gru_output_range_model_epoch{}.model'
 		device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 		batchSize = 1024
 		shuffle = True
@@ -47,10 +47,10 @@ def train(seqModel, param = None):
 			s = s.to(device)
 			y = (y / MAX_LENGTH).to(device)
 
-			out, mu, logvar = seqModel(s)
-			#out = seqModel(s)
+			#out, mu, logvar = seqModel(s)
+			out = seqModel(s)
 			loss = criterion(out, y)
-			loss = loss + KLD(mu, logvar)
+			#loss = loss + KLD(mu, logvar)
 
 			optimizer.zero_grad()
 			loss.backward()
