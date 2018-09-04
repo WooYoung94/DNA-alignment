@@ -17,7 +17,7 @@ def test(seqModel, batchSize = 1):
 	device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 	shuffle = True
 
-	seqData = dl.sequenceDataset('/home/dataset/genome/hg38/devData/test_chrM.fa')
+	seqData = dl.sequenceDataset('/home/dataset/genome/hg38/devData/trainData_chrM.fa')
 	seqDataLoader = torch.utils.data.DataLoader(dataset = seqData, batch_size = batchSize, shuffle = shuffle)
 
 	criterion = nn.MSELoss()
@@ -30,7 +30,7 @@ def test(seqModel, batchSize = 1):
 		s = s.to(device)
 		y = y.to(device)
 
-		out = ((seqModel(s) - 0.2) / 0.6) * MAX_LENGTH
+		out = seqModel(s) * MAX_LENGTH
 		loss = criterion(out, y)
 
 		y = y.cpu().numpy()[0].astype(np.int32)
@@ -52,7 +52,7 @@ def testVariant(seqModel, batchSize = 1):
 	device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 	shuffle = True
 
-	seqData = dl.sequenceDataset('/home/dataset/genome/hg38/devData/variant_chrM.fa')
+	seqData = dl.sequenceDataset('/home/dataset/genome/hg38/devData/testData_chrM.fa')
 	seqDataLoader = torch.utils.data.DataLoader(dataset = seqData, batch_size = batchSize, shuffle = shuffle)
 
 	criterion = nn.MSELoss()
@@ -65,7 +65,7 @@ def testVariant(seqModel, batchSize = 1):
 		s = s.to(device)
 		y = y.to(device)
 
-		out = ((seqModel(s) - 0.2) / 0.6) * MAX_LENGTH
+		out = seqModel(s) * MAX_LENGTH
 		loss = criterion(out, y)
 
 		y = y.cpu().numpy()[0].astype(np.int32)

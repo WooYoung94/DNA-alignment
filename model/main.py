@@ -10,7 +10,7 @@ import dataLoader as dl
 import train
 import test
 
-if __name__ == '__main__':
+def main():
 
 	log = ['=']
 	#seqModel = m.seqMLP()
@@ -38,3 +38,7 @@ if __name__ == '__main__':
 	with open(sys.argv[1], 'w') as fs:
 
 		fs.write(''.join(log))
+
+if __name__ == '__main__':
+
+	main()

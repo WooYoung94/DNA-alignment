@@ -7,8 +7,6 @@ import sys
 import random
 
 SEQLENGTH = 32
-MIN_PAIR = 300
-MAX_PAIR = 5000
 
 def getSeqence(seq, idx, length):
 
@@ -35,14 +33,8 @@ if __name__ == '__main__':
 
 	print(len(data))
 
-	with open(os.path.join(os.getcwd(), 'test_' + os.path.basename(sys.argv[1])), 'w') as fs:
+	with open(os.path.join(os.getcwd(), 'trainData_' + os.path.basename(sys.argv[1])), 'w') as fs:
 
 		for idx, val in enumerate(data):
-
-			#gap = random.randint(MIN_PAIR, MAX_PAIR)
-			#pairIdx = (idx + gap) % (len(seq) - MAX_PAIR - SEQLENGTH)
-			#pair = data[pairIdx]
-
-			#fs.write('\t'.join([val, pair, str(gap), str(idx), str(pairIdx)]) + '\n')
 
 			fs.write('\t'.join([val, str(idx)]) + '\n')

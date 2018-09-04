@@ -97,31 +97,6 @@ class Encoder(nn.Module):
 
 		return self.main(x)
 
-class seqMLP(nn.Module):
-
-	def __init__(self):
-
-		super(seqMLP, self).__init__()
-
-		self.enc = Encoder(32 * 5, 128, norm = 'none')
-		self.fc1 = LinearBlock(128, 128, norm = 'none', activation = 'relu')
-		self.fc2 = LinearBlock(128, 128, norm = 'none', activation = 'relu')
-		self.fc3 = LinearBlock(128, 128, norm = 'none', activation = 'relu')
-		self.fc4 = LinearBlock(128, 128, norm = 'none', activation = 'relu')
-		self.fc5 = LinearBlock(128, 1, norm = 'none', activation = 'relu')
-
-		layers = [self.fc1, self.fc2, self.fc3, self.fc4, self.fc5]
-		self.main = nn.Sequential(*layers)
-
-	def forward(self, seq):
-
-		seq = seq.view(seq.size(0), -1).float()
-
-		out = self.enc(seq)
-		out = self.main(out)
-
-		return out
-
 class seqGRU(nn.Module):
 
 	def __init__(self):
@@ -145,7 +120,7 @@ class seqGRU(nn.Module):
 		out = self.relu(out)
 		out = self.fc1_drop(out)
 		out = self.fc2(out)
-		out = self.sigmoid(out) * 0.6 + 0.2
+		out = self.sigmoid(out)
 
 		return out
 
@@ -191,7 +166,7 @@ class seqCNN(nn.Module):
 
 		super(seqCNN, self).__init__()
 
-		self.enc = nn.Conv2d(1, 64, (4, 3), stride = 1, padding = (0, 1))
+		self.enc = nn.Conv2d(1, 64, (5, 3), stride = 1, padding = (0, 1))
 		#self.res1 = resBlock1D(64, 128, 3)
 		#self.res2 = resBlock1D(128, 256, 3)
 		#self.res3 = resBlock1D(256, 512, 3)
@@ -200,15 +175,23 @@ class seqCNN(nn.Module):
 		self.res1 = nn.Conv1d(64, 128, 3, padding = 1)
 		self.res2 = nn.Conv1d(128, 256, 3, padding = 1)
 		self.res3 = nn.Conv1d(256, 512, 3, padding = 1)
-		self.res4 = nn.Conv1d(512, 1024, 3, padding = 1)
+		self.res4 = nn.Conv1d(512, 1024 * 2, 3, padding = 1)
 		self.relu = nn.ReLU(inplace = True)
 		self.bn1 = nn.BatchNorm1d(128)
 		self.bn2 = nn.BatchNorm1d(256)
 		self.bn3 = nn.BatchNorm1d(512)
-		self.bn4 = nn.BatchNorm1d(1024)
 
 		self.conv1 = nn.Conv1d(1024, 1, 32)
 		self.sigmoid = nn.Sigmoid()
+
+	def reparam(self, x):
+
+		mu = x[:, :1024, :]
+		logvar = x[:, 1024:, :]
+		std = torch.exp(0.5 * logvar)
+		eps = torch.randn_like(std)
+
+		return eps.mul(std).add_(mu), mu, logvar
 
 	def forward(self, seq):
 
@@ -223,13 +206,16 @@ class seqCNN(nn.Module):
 		#out = self.res3(out)
 		#out = self.res4(out)
 		
-		out = self.relu(self.bn1(self.res1(out)))
-		out = self.relu(self.bn2(self.res2(out)))
-		out = self.relu(self.bn3(self.res3(out)))
-		out = self.relu(self.bn4(self.res4(out)))
+		out = self.relu(self.res1(out))
+		out = self.relu(self.res2(out))
+		out = self.relu(self.res3(out))
+		out = self.res4(out)
+
+		#out, mu, logvar = self.reparam(out)
 
 		out = self.conv1(out)
-		out = self.sigmoid(out) * 0.6 + 0.2
+		out = self.sigmoid(out)
 		out = out.view(out.size(0), out.size(1))
 
+		#return out, mu, logvar
 		return out

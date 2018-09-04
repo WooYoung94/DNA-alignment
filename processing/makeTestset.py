@@ -8,75 +8,24 @@ import sys
 import random
 
 SEQLENGTH = 32
-MIN_PAIR = 300
-MAX_PAIR = 5000
-SNP_PROB = 0.001
-
-def makeVariant(seq):
-
-	# SNP
-	idx = random.randint(0, 31)
-	seq = seq.upper()
-	baseList = ['A', 'G', 'T', 'C']
-	baseList.remove(seq[idx])
-	seq = seq[:idx] + random.choice(baseList) + seq[idx + 1:]
-
-	return seq
-
-def getSeqence(seq, idx, length):
-
-	return seq[idx:idx + length]
+SNP_PROB = 0.01
 
 if __name__ == '__main__':
 
-	data = list()
-	dataVariant = list()
-
 	with open(sys.argv[1], 'r') as fs:
 
-		seq = fs.read()
-		print(len(seq))
+		full = fs.read()
+		print(len(full))
 
-	print(len(seq[:-SEQLENGTH]) + 1)
+	full = list(full)
+	variantIdx = [random.randint(0, len(full)) for _ in range(int(SNP_PROB * len(full)))]
 
-	for idx in range(len(seq[:-SEQLENGTH]) + 1):
+	for idx in range(len(full)):
 
-		cut = getSeqence(seq, idx, SEQLENGTH)
+		if full[idx] != 'N' and idx in variantIdx:
 
-		if 'N' not in cut:
-
-			data.append(cut)
-
-	print(len(data))
-
-	for idx, val in enumerate(data):
-
-		prob = random.random()
-
-		if prob < SNP_PROB:
-
-			variant = makeVariant(val)
-
-			if variant in data:
-
-				dataVariant.append(val)
-
-			else:
-
-				dataVariant.append(variant)
-
-		else:
-
-			dataVariant.append(val)
+			full[idx] = 'W'
 
 	with open(os.path.join(os.getcwd(), 'variant_' + os.path.basename(sys.argv[1])), 'w') as fs:
 
-		for idx, val in enumerate(dataVariant):
-
-			#gap = random.randint(MIN_PAIR, MAX_PAIR)
-			#pairIdx = (idx + gap) % (len(seq) - MAX_PAIR - SEQLENGTH)
-			#pair = data[pairIdx]
-
-			#fs.write('\t'.join([val, pair, str(gap), str(idx), str(pairIdx)]) + '\n')
-
-			fs.write('\t'.join([val, str(idx)]) + '\n')
+		fs.write(''.join(full))

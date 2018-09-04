@@ -9,6 +9,10 @@ import dataLoader as dl
 
 MAX_LENGTH = 16505
 
+def KLD(mu, logvar):
+
+	return -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
+
 def train(seqModel, param = None):
 
 	log = list()
@@ -26,7 +30,7 @@ def train(seqModel, param = None):
 		learningRate = 0.0001
 		epochNum = 2000
 
-		seqData = dl.sequenceDataset('/home/dataset/genome/hg38/devData/test_chrM.fa')
+		seqData = dl.sequenceDataset('/home/dataset/genome/hg38/devData/trainData_chrM.fa')
 		seqDataLoader = torch.utils.data.DataLoader(dataset = seqData, batch_size = batchSize, shuffle = shuffle)
 
 		seqModel = seqModel.to(device)
@@ -41,10 +45,12 @@ def train(seqModel, param = None):
 		for idx, (s, y) in enumerate(seqDataLoader):
 
 			s = s.to(device)
-			y = ((y / MAX_LENGTH) * 0.6 + 0.2).to(device)
+			y = (y / MAX_LENGTH).to(device)
 
+			#out, mu, logvar = seqModel(s)
 			out = seqModel(s)
 			loss = criterion(out, y)
+			#loss = loss + KLD(mu, logvar)
 
 			optimizer.zero_grad()
 			loss.backward()
