@@ -17,7 +17,7 @@ def test(seqModel, batchSize = 1):
 	device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 	shuffle = True
 
-	seqData = dl.sequenceDataset('/home/dataset/genome/hg38/devData/trainData_chrM.fa')
+	seqData = dl.sequenceDataset('/home/dataset/genome/hg38/devData/trainData_chrM_original.fa')
 	seqDataLoader = torch.utils.data.DataLoader(dataset = seqData, batch_size = batchSize, shuffle = shuffle)
 
 	criterion = nn.MSELoss()
@@ -52,7 +52,7 @@ def testVariant(seqModel, batchSize = 1):
 	device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 	shuffle = True
 
-	seqData = dl.sequenceDataset('/home/dataset/genome/hg38/devData/testData_chrM.fa')
+	seqData = dl.sequenceDataset('/home/dataset/genome/hg38/devData/trainData_chrM_variant_2.fa')
 	seqDataLoader = torch.utils.data.DataLoader(dataset = seqData, batch_size = batchSize, shuffle = shuffle)
 
 	criterion = nn.MSELoss()
