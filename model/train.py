@@ -23,7 +23,7 @@ def train(seqModel, param = None):
 
 	else:
 
-		modelPath = '/home/youngwoo/Documents/models/DNA/gru_output_range_model_epoch{}.model'
+		modelPath = '/home/youngwoo/Documents/models/DNA/cnn_noVAE_model_epoch{}.model'
 		device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 		batchSize = 1024
 		shuffle = True
@@ -61,6 +61,6 @@ def train(seqModel, param = None):
 
 		if (epoch + 1) % 100 == 0 and epoch > 0:
 
-			torch.save(seqModel.state_dict(), modelPath.format(epoch))
+			torch.save(seqModel.state_dict(), modelPath.format(epoch + 1))
 
 	return log
