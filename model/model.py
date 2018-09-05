@@ -106,7 +106,7 @@ class seqGRU(nn.Module):
 		self.gru = nn.GRU(5, 256, 2, batch_first = True, bidirectional = True, dropout = 0.1)
 		self.fc1 = nn.Linear(512, 64)
 		self.fc2 = nn.Linear(64, 1)
-		self.fc1_drop = nn.Dropout(0.1, inplace = True)
+		self.fc1_drop = nn.Dropout(0.1)
 		self.sigmoid = nn.Sigmoid()
 		self.relu = nn.ReLU(inplace = True)
 
