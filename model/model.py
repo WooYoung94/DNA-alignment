@@ -103,10 +103,10 @@ class seqGRU(nn.Module):
 
 		super(seqGRU, self).__init__()
 		
-		self.gru = nn.GRU(4, 256, 2, batch_first = True, bidirectional = True, dropout = 0.1)
+		self.gru = nn.GRU(5, 256, 2, batch_first = True, bidirectional = True, dropout = 0.1)
 		self.fc1 = nn.Linear(512, 64)
 		self.fc2 = nn.Linear(64, 1)
-		self.fc1_drop = nn.Dropout(0.1, inplace = True)
+		self.fc1_drop = nn.Dropout(0.1)
 		self.sigmoid = nn.Sigmoid()
 		self.relu = nn.ReLU(inplace = True)
 
@@ -120,7 +120,8 @@ class seqGRU(nn.Module):
 		out = self.relu(out)
 		out = self.fc1_drop(out)
 		out = self.fc2(out)
-		out = self.sigmoid(out)
+		#out = self.sigmoid(out)
+		out = self.relu(out)
 
 		return out
 
@@ -175,7 +176,7 @@ class seqCNN(nn.Module):
 		self.res1 = nn.Conv1d(64, 128, 3, padding = 1)
 		self.res2 = nn.Conv1d(128, 256, 3, padding = 1)
 		self.res3 = nn.Conv1d(256, 512, 3, padding = 1)
-		self.res4 = nn.Conv1d(512, 1024 * 2, 3, padding = 1)
+		self.res4 = nn.Conv1d(512, 1024, 3, padding = 1)
 		self.relu = nn.ReLU(inplace = True)
 		self.bn1 = nn.BatchNorm1d(128)
 		self.bn2 = nn.BatchNorm1d(256)
@@ -211,11 +212,11 @@ class seqCNN(nn.Module):
 		out = self.relu(self.res3(out))
 		out = self.res4(out)
 
-		out, mu, logvar = self.reparam(out)
+		#out, mu, logvar = self.reparam(out)
 
 		out = self.conv1(out)
 		out = self.sigmoid(out)
 		out = out.view(out.size(0), out.size(1))
 
-		return out, mu, logvar
-		#return out
+		#return out, mu, logvar
+		return out

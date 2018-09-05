@@ -13,7 +13,6 @@ import test
 def main():
 
 	log = ['=']
-	#seqModel = m.seqMLP()
 	#seqModel = m.seqGRU()
 	seqModel = m.seqCNN()
 
@@ -31,7 +30,7 @@ def main():
 
 	timeNow = timeit.default_timer()
 	print('[info] inference test start')
-	test.test(seqModel, batchSize = 4096)
+	test.test(seqModel, batchSize = 1024)
 	testTime = timeit.default_timer() - timeNow
 	print('[info] elapsed time : ', testTime)
 

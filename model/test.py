@@ -32,7 +32,6 @@ def test(seqModel, batchSize = 1):
 
 		#out, mu, logvar = seqModel(s)
 		#out = out * MAX_LENGTH
-		#out = seqModel(s)
 		out = seqModel(s) * MAX_LENGTH
 		loss = criterion(out, y)
 
@@ -68,10 +67,9 @@ def testVariant(seqModel, batchSize = 1):
 		s = s.to(device)
 		y = y.to(device)
 
-		out, mu, logvar = seqModel(s)
-		out = out * MAX_LENGTH
-		#out = seqModel(s)
-		#out = seqModel(s) * MAX_LENGTH
+		#out, mu, logvar = seqModel(s)
+		#out = out * MAX_LENGTH
+		out = seqModel(s) * MAX_LENGTH
 		loss = criterion(out, y)
 
 		y = y.cpu().numpy()[0].astype(np.int32)

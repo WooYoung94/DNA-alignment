@@ -13,7 +13,6 @@ import test
 if __name__ == '__main__':
 
 	log = ['=']
-	#seqModel = m.seqMLP()
 	#seqModel = m.seqGRU()
 	seqModel = m.seqCNN()
 
