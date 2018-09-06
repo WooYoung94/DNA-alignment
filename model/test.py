@@ -10,6 +10,10 @@ import dataLoader as dl
 
 MAX_LENGTH = 16505
 
+def KLD(mu, logvar):
+
+	return -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
+
 def test(seqModel, batchSize = 1):
 
 	log = list()
@@ -30,10 +34,11 @@ def test(seqModel, batchSize = 1):
 		s = s.to(device)
 		y = y.to(device)
 
-		#out, mu, logvar = seqModel(s)
-		#out = out * MAX_LENGTH
-		out = seqModel(s) * MAX_LENGTH
+		out, mu, logvar = seqModel(s)
+		out = out * MAX_LENGTH
+		#out = seqModel(s) * MAX_LENGTH
 		loss = criterion(out, y)
+		loss = loss + 0.01 * KLD(mu, logvar)
 
 		y = y.cpu().numpy()[0].astype(np.int32)
 		o = out.detach().cpu().numpy()[0].astype(np.int32)
@@ -67,10 +72,11 @@ def testVariant(seqModel, batchSize = 1):
 		s = s.to(device)
 		y = y.to(device)
 
-		#out, mu, logvar = seqModel(s)
-		#out = out * MAX_LENGTH
-		out = seqModel(s) * MAX_LENGTH
+		out, mu, logvar = seqModel(s)
+		out = out * MAX_LENGTH
+		#out = seqModel(s) * MAX_LENGTH
 		loss = criterion(out, y)
+		loss = loss + 0.01 * KLD(mu, logvar)
 
 		y = y.cpu().numpy()[0].astype(np.int32)
 		o = out.detach().cpu().numpy()[0].astype(np.int32)
