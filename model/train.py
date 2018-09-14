@@ -47,11 +47,9 @@ def train(seqModel, param = None):
 			s = s.to(device)
 			y = (y / MAX_LENGTH).to(device)
 
-			out, mu, logvar = seqModel(s)
-			#out = seqModel(s)
+			out = seqModel(s)
 			loss = criterion(out, y)
-			loss = loss + 0.01 * KLD(mu, logvar)
-
+			
 			optimizer.zero_grad()
 			loss.backward()
 			optimizer.step()

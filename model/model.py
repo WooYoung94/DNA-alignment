@@ -120,44 +120,7 @@ class seqGRU(nn.Module):
 		out = self.relu(out)
 		out = self.fc1_drop(out)
 		out = self.fc2(out)
-		#out = self.sigmoid(out)
-		out = self.relu(out)
-
-		return out
-
-class resBlock1D(nn.Module):
-
-	def __init__(self, inDim, outDim, size = 3, stride = 1):
-
-		super(resBlock1D, self).__init__()
-
-		self.inDim = inDim
-		self.outDim = outDim
-
-		self.conv0 = nn.Conv1d(inDim, outDim, size, stride = stride, padding = 1, bias = False)
-		self.bn0 = nn.BatchNorm1d(outDim)
-		self.conv1 = nn.Conv1d(outDim, outDim, size, stride = stride, padding = 1, bias = False)
-		self.bn1 = nn.BatchNorm1d(outDim)
-		self.conv2 = nn.Conv1d(outDim, outDim, size, stride = stride, padding = 1, bias = False)
-		self.bn2 = nn.BatchNorm1d(outDim)
-		self.relu = nn.ReLU(inplace = True)
-
-	def forward(self, x):
-
-		if self.inDim != self.outDim:
-
-			x = self.conv0(x)
-			x = self.bn0(x)
-			x = self.relu(x)
-
-		out = self.conv1(x)
-		out = self.bn1(out)
-		out = self.relu(out)
-		out = self.conv2(out)
-		out = self.bn2(out)
-
-		out = out + x
-		out = self.relu(out)
+		out = self.sigmoid(out)
 
 		return out
 
@@ -168,19 +131,13 @@ class seqCNN(nn.Module):
 		super(seqCNN, self).__init__()
 
 		self.enc = nn.Conv2d(1, 64, (5, 3), stride = 1, padding = (0, 1))
-		#self.res1 = resBlock1D(64, 128, 3)
-		#self.res2 = resBlock1D(128, 256, 3)
-		#self.res3 = resBlock1D(256, 512, 3)
-		#self.res4 = resBlock1D(512, 1024, 3)
+
 
 		self.res1 = nn.Conv1d(64, 128, 3, padding = 1)
 		self.res2 = nn.Conv1d(128, 256, 3, padding = 1)
 		self.res3 = nn.Conv1d(256, 512, 3, padding = 1)
-		self.res4 = nn.Conv1d(512, 1024 * 2, 3, padding = 1)
+		self.res4 = nn.Conv1d(512, 1024, 3, padding = 1)
 		self.relu = nn.ReLU(inplace = True)
-		self.bn1 = nn.BatchNorm1d(128)
-		self.bn2 = nn.BatchNorm1d(256)
-		self.bn3 = nn.BatchNorm1d(512)
 
 		self.conv1 = nn.Conv1d(1024, 1, 32)
 		self.sigmoid = nn.Sigmoid()
@@ -212,11 +169,10 @@ class seqCNN(nn.Module):
 		out = self.relu(self.res3(out))
 		out = self.res4(out)
 
-		out, mu, logvar = self.reparam(out)
+		#out, mu, logvar = self.reparam(out)
 
 		out = self.conv1(out)
 		out = self.sigmoid(out)
 		out = out.view(out.size(0), out.size(1))
 
-		return out, mu, logvar
-		#return out
+		return out
