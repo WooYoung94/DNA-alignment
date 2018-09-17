@@ -64,7 +64,6 @@ class sequenceDataset(Dataset):
 
 			self.seq = fs.read()[:-1]
 
-
 		self.dataIdx = [idx for idx, val in enumerate(self.seq) if val != 'N']
 
 	def __len__(self):
