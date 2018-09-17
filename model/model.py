@@ -124,6 +124,7 @@ class seqGRU(nn.Module):
 
 		return out
 
+"""
 class seqCNN(nn.Module):
 
 	def __init__(self):
@@ -164,6 +165,42 @@ class seqCNN(nn.Module):
 		out = self.conv4(out)
 
 		#out, mu, logvar = self.reparam(out)
+
+		out = self.conv5(out)
+		out = self.sigmoid(out)
+		out = out.view(out.size(0), out.size(1))
+
+		return out
+"""
+
+class seqCNN(nn.Module):
+
+	def __init__(self):
+
+		super(seqCNN, self).__init__()
+
+		self.enc = nn.Conv2d(1, 64, (5, 3), stride = 1, padding = (0, 1))
+
+		self.conv1 = nn.Conv1d(64, 128, 3, padding = 1)
+		self.conv2 = nn.Conv1d(128, 256, 3, padding = 1)
+		self.conv3 = nn.Conv1d(256, 512, 3, padding = 1)
+		self.conv4 = nn.Conv1d(512, 1024, 3, padding = 1)
+		self.conv5 = nn.Conv1d(1024, 1, 32)
+		
+		self.relu = nn.ReLU(inplace = True)
+		self.sigmoid = nn.Sigmoid()
+
+	def forward(self, seq):
+
+		seq = seq.float().view(seq.size(0), 1, seq.size(1), seq.size(2))
+		
+		out = self.enc(seq)
+		out = out.view(out.size(0), out.size(1), out.size(3))
+		
+		out = self.relu(self.conv1(out))
+		out = self.relu(self.conv2(out))
+		out = self.relu(self.conv3(out))
+		out = self.conv4(out)
 
 		out = self.conv5(out)
 		out = self.sigmoid(out)
