@@ -226,7 +226,7 @@ class seqCNN(nn.Module):
 
 		#print('out', out.shape)
 
-		latent = out
+		latent = out.view(-1)
 
 		out = self.relu(self.fc1(out))
 		out = self.drop(out)
