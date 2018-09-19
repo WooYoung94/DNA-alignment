@@ -185,14 +185,15 @@ class seqCNN(nn.Module):
 		self.conv1_9 = nn.Conv1d(64, 256, 9, padding = 0)
 		self.conv1_15 = nn.Conv1d(64, 512, 15, padding = 0)
 
+		self.conv2_3 = nn.Conv1d(128, 1024, 10, padding = 0)
+		self.conv2_9 = nn.Conv1d(256, 1024, 8, padding = 0)
+		self.conv2_15 = nn.Conv1d(512, 2048, 6, padding = 0)
 
-		
-		self.conv2 = nn.Conv1d(128, 256, 3, padding = 1)
-		self.conv3 = nn.Conv1d(256, 512, 3, padding = 1)
-		self.conv4 = nn.Conv1d(512, 1024, 3, padding = 1)
-		self.conv5 = nn.Conv1d(1024, 1, 32)
-		
+		self.fc1 = nn.Linear(4096, 1024)
+		self.fc2 = nn.Linear(1024, 1)
+	
 		self.relu = nn.ReLU(inplace = True)
+		self.drop = nn.Dropout(0.1)
 		self.maxpool3 = nn.MaxPool1d(3)
 		self.sigmoid = nn.Sigmoid()
 
@@ -208,15 +209,26 @@ class seqCNN(nn.Module):
 		out1_7 = self.maxpool3(self.relu(self.conv1_15(out)))
 
 		print('1_3', out1_3.shape)
-		print('1_9', out1_5.shape)
-		print('1_15', out1_7.shape)
+		print('1_9', out1_9.shape)
+		print('1_15', out1_15.shape)
 
-		out = self.relu(self.conv2(out))
-		out = self.relu(self.conv3(out))
-		out = self.conv4(out)
+		out2_3 = self.relu(self.conv2_3(out1_3))
+		out2_9 = self.relu(self.conv2_9(out1_9))
+		out2_15 = self.relu(self.conv2_15(out1_15))
 
-		out = self.conv5(out)
+		print('2_3', out2_3.shape)
+		print('2_9', out2_9.shape)
+		print('2_15', out2_15.shape)
+
+		out = torch. concat((out2_3, out2_9, out2_15), dim = 2)
+
+		print('out', out.shape)
+
+		out = self.relu(self.fc1(out))
+		out = self.drop(out)
+		out = self.fc2(out)
 		out = self.sigmoid(out)
-		out = out.view(out.size(0), out.size(1))
+
+		print('out', out.shape)
 
 		return out
