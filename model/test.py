@@ -119,9 +119,6 @@ def testLatent(seqModel, batchSize = 1, dataset = 'origin'):
 
 		_, latent = seqModel(s)
 		l = latent.cpu().detach().numpy()
-
-		print(l.shape)
-
 		latentList.append(l)
 
 	return latentList

@@ -24,6 +24,6 @@ if __name__ == '__main__':
 	testTime = timeit.default_timer() - timeNow
 	print('[info] elapsed time : ', testTime)
 
-	#with open(sys.argv[3], 'wb') as fs:
-	#
-	#	pickle.dump(latent, fs)
+	with open(sys.argv[3], 'wb') as fs:
+	
+		pickle.dump(latent, fs)
