@@ -226,6 +226,8 @@ class seqCNN(nn.Module):
 
 		#print('out', out.shape)
 
+		latent = out
+
 		out = self.relu(self.fc1(out))
 		out = self.drop(out)
 		out = self.fc2(out)
@@ -234,3 +236,4 @@ class seqCNN(nn.Module):
 		#print('out', out.shape)
 
 		return out
+		#return out, latent

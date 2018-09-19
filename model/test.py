@@ -86,3 +86,42 @@ def testVariant(seqModel, batchSize = 1):
 				.format(y, o, loss.item()))
 
 	return log
+
+def testLatent(seqModel, batchSize = 1, dataset = 'origin'):
+
+	latentList = list()
+
+	device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+	shuffle = False
+
+	if dataset == 'origin':
+
+		seqData = dl.sequenceDataset('/home/dataset/genome/hg38/devData/trainData_chrM_original.fa')
+
+	elif dataset == 'test':
+
+		seqData = dl.sequenceDataset('/home/dataset/genome/hg38/devData/trainData_chrM_variant_2.fa')
+
+	else:
+
+		print('wrong dataset option')
+
+		return log
+
+	seqDataLoader = torch.utils.data.DataLoader(dataset = seqData, batch_size = batchSize, shuffle = shuffle)
+
+	seqModel = seqModel.to(device)
+	seqModel.eval()
+	
+	for idx, (s, y) in enumerate(seqDataLoader):
+
+		s = s.to(device)
+
+		_, latent = seqModel(s) * MAX_LENGTH
+		l = latent.cpu().numpy()
+
+		print(l.shape)
+
+		latentList.append(l)
+
+	return latentList
