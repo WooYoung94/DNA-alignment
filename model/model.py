@@ -221,6 +221,7 @@ class seqCNN(nn.Module):
 		print('2_15', out2_15.shape)
 
 		out = torch.cat((out2_3, out2_9, out2_15), dim = 1)
+		out = out.view(out.size(0), out.size(1))
 
 		print('out', out.shape)
 
