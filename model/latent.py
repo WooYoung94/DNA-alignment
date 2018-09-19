@@ -20,10 +20,10 @@ if __name__ == '__main__':
 
 	timeNow = timeit.default_timer()
 	print('[info] test start')
-	latent = test.testLatent(seqModel, batchSize = 1)
+	latent = test.testLatent(seqModel, batchSize = 1, dataset = sys.argv[2])
 	testTime = timeit.default_timer() - timeNow
 	print('[info] elapsed time : ', testTime)
 
-	#with open(sys.argv[2], 'wb') as fs:
+	#with open(sys.argv[3], 'wb') as fs:
 	#
 	#	pickle.dump(latent, fs)
