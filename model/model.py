@@ -124,7 +124,7 @@ class seqGRU(nn.Module):
 
 		return out
 
-"""
+
 class seqCNN(nn.Module):
 
 	def __init__(self):
@@ -171,9 +171,9 @@ class seqCNN(nn.Module):
 		out = out.view(out.size(0), out.size(1))
 
 		return out
+
+
 """
-
-
 class seqCNN(nn.Module):
 
 	def __init__(self):
@@ -234,3 +234,4 @@ class seqCNN(nn.Module):
 		#print('out', out.shape)
 
 		return out
+"""
