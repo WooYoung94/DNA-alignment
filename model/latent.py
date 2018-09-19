@@ -1,10 +1,10 @@
 import os
 import sys
-import numpy as np
+import timeit
+import pickle
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import pickle
 
 import model as m
 import dataLoader as dl
