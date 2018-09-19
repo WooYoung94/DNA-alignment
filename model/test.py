@@ -118,7 +118,7 @@ def testLatent(seqModel, batchSize = 1, dataset = 'origin'):
 		s = s.to(device)
 
 		_, latent = seqModel(s)
-		l = latent.cpu().numpy()
+		l = latent.detach().numpy()
 
 		print(l.shape)
 
