@@ -185,12 +185,12 @@ class seqCNN(nn.Module):
 		self.conv1_9 = nn.Conv1d(64, 256, 9, padding = 0)
 		self.conv1_15 = nn.Conv1d(64, 512, 15, padding = 0)
 
-		self.conv2_3 = nn.Conv1d(128, 1024, 10, padding = 0)
-		self.conv2_9 = nn.Conv1d(256, 1024, 8, padding = 0)
-		self.conv2_15 = nn.Conv1d(512, 2048, 6, padding = 0)
+		self.conv2_3 = nn.Conv1d(128, 512, 10, padding = 0)
+		self.conv2_9 = nn.Conv1d(256, 512, 8, padding = 0)
+		self.conv2_15 = nn.Conv1d(512, 1024, 6, padding = 0)
 
-		self.fc1 = nn.Linear(4096, 1024)
-		self.fc2 = nn.Linear(1024, 1)
+		self.fc1 = nn.Linear(2048, 128)
+		self.fc2 = nn.Linear(128, 1)
 	
 		self.relu = nn.ReLU(inplace = True)
 		self.drop = nn.Dropout(0.1)
