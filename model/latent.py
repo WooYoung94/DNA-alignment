@@ -6,7 +6,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import pickle
 
-import model
+import model as m
 import dataLoader as dl
 import train
 import test
