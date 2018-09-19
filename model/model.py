@@ -182,8 +182,11 @@ class seqCNN(nn.Module):
 		self.enc = nn.Conv2d(1, 64, (5, 3), stride = 1, padding = (0, 1))
 
 		self.conv1_3 = nn.Conv1d(64, 128, 3, padding = 1)
-		self.conv1_5 = nn.Conv1d(64, 128, 5, padding = 1)
-		self.conv1_7 = nn.Conv1d(64, 128, 7, padding = 1)
+		self.conv1_5 = nn.Conv1d(64, 128, 5, padding = 2)
+		self.conv1_7 = nn.Conv1d(64, 128, 7, padding = 3)
+		self.maxpool1_3 = nn. MaxPool1d(2)
+		self.maxpool1_5 = nn. MaxPool1d(2)
+		self.maxpool1_7 = nn. MaxPool1d(2)
 
 		self.conv2 = nn.Conv1d(128, 256, 3, padding = 1)
 		self.conv3 = nn.Conv1d(256, 512, 3, padding = 1)
@@ -200,9 +203,9 @@ class seqCNN(nn.Module):
 		out = self.enc(seq)
 		out = out.view(out.size(0), out.size(1), out.size(3))
 		
-		out1_3 = self.relu(self.conv1_3(out))
-		out1_5 = self.relu(self.conv1_5(out))
-		out1_7 = self.relu(self.conv1_7(out))
+		out1_3 = self.maxpool1_3(self.relu(self.conv1_3(out)))
+		out1_5 = self.maxpool1_3(self.relu(self.conv1_5(out)))
+		out1_7 = self.maxpool1_3(self.relu(self.conv1_7(out)))
 
 		print('1_3', out1_3.shape)
 		print('1_5', out1_5.shape)
