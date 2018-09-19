@@ -205,8 +205,8 @@ class seqCNN(nn.Module):
 		out = out.view(out.size(0), out.size(1), out.size(3))
 		
 		out1_3 = self.maxpool3(self.relu(self.conv1_3(out)))
-		out1_5 = self.maxpool3(self.relu(self.conv1_9(out)))
-		out1_7 = self.maxpool3(self.relu(self.conv1_15(out)))
+		out1_9 = self.maxpool3(self.relu(self.conv1_9(out)))
+		out1_15 = self.maxpool3(self.relu(self.conv1_15(out)))
 
 		print('1_3', out1_3.shape)
 		print('1_9', out1_9.shape)
