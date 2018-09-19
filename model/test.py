@@ -106,7 +106,7 @@ def testLatent(seqModel, batchSize = 1, dataset = 'origin'):
 
 		print('wrong dataset option')
 
-		return log
+		return latentList
 
 	seqDataLoader = torch.utils.data.DataLoader(dataset = seqData, batch_size = batchSize, shuffle = shuffle)
 
