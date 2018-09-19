@@ -117,7 +117,7 @@ def testLatent(seqModel, batchSize = 1, dataset = 'origin'):
 
 		s = s.to(device)
 
-		_, latent = seqModel(s) * MAX_LENGTH
+		_, latent = seqModel(s)
 		l = latent.cpu().numpy()
 
 		print(l.shape)
