@@ -23,14 +23,14 @@ def train(seqModel, param = None):
 
 	else:
 
-		modelPath = '/home/youngwoo/Documents/models/DNA/yoon_kim_cnn1.model'
+		modelPath = '/home/youngwoo/Documents/models/DNA/yoon_kim_cnn2.model'
 		device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 		batchSize = 1024
 		shuffle = True
 		learningRate = 0.0001
 		epochNum = 2000
 
-		seqData = dl.sequenceDataset('/home/dataset/genome/hg38/devData/trainData_chrM_augmented(origin+1).fa')
+		seqData = dl.sequenceDataset('/home/dataset/genome/hg38/devData/trainData_chrM_augmented(origin+3).fa')
 		seqDataLoader = torch.utils.data.DataLoader(dataset = seqData, batch_size = batchSize, shuffle = shuffle)
 
 		seqModel = seqModel.to(device)
