@@ -220,7 +220,7 @@ class seqCNN(nn.Module):
 		print('2_9', out2_9.shape)
 		print('2_15', out2_15.shape)
 
-		out = torch. concat((out2_3, out2_9, out2_15), dim = 2)
+		out = torch.cat((out2_3, out2_9, out2_15), dim = 1)
 
 		print('out', out.shape)
 
