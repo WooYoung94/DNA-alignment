@@ -235,5 +235,5 @@ class seqCNN(nn.Module):
 
 		#print('out', out.shape)
 
-		return out
-		#return out, latent
+		#return out
+		return out, latent
