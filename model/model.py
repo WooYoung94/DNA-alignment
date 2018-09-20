@@ -209,24 +209,24 @@ class seqCNN(nn.Module):
 		out1_9 = self.maxpool3(self.relu(self.conv1_9(out)))
 		out1_15 = self.maxpool3(self.relu(self.conv1_15(out)))
 
-		print('1_3', out1_3.shape)
-		print('1_9', out1_9.shape)
-		print('1_15', out1_15.shape)
+		#print('1_3', out1_3.shape)
+		#print('1_9', out1_9.shape)
+		#print('1_15', out1_15.shape)
 
 		out2_3 = self.relu(self.conv2_3(out1_3))
 		out2_9 = self.relu(self.conv2_9(out1_9))
 		out2_15 = self.relu(self.conv2_15(out1_15))
 
-		print('2_3', out2_3.shape)
-		print('2_9', out2_9.shape)
-		print('2_15', out2_15.shape)
+		#print('2_3', out2_3.shape)
+		#print('2_9', out2_9.shape)
+		#print('2_15', out2_15.shape)
 
 		out = torch.cat((out2_3, out2_9, out2_15), dim = 1)
 		out = out.view(out.size(0), out.size(1))
 
-		print('out', out.shape)
+		#print('out', out.shape)
 
-		latent = out.view(-1)
+		#latent = out.view(-1)
 
 		out = self.relu(self.fc1(out))
 		out = self.drop(out)
@@ -235,5 +235,5 @@ class seqCNN(nn.Module):
 
 		#print('out', out.shape)
 
-		#return out
-		return out, latent
+		return out
+		#return out, latent
